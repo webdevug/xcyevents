@@ -1,0 +1,1794 @@
+/* =========================================================
+   XCY EVENTS
+   EDITORIAL LUXURY DESIGN
+========================================================= */
+
+
+:root {
+
+    --paper: #f1eee7;
+    --paper-dark: #e8e4db;
+
+    --ink: #171614;
+    --soft-ink: #4d4a45;
+
+    --muted: #88847c;
+
+    --line: rgba(23,22,20,.18);
+
+    --accent: #6f2e32;
+
+    --serif: "Cormorant Garamond", serif;
+    --sans: "Manrope", sans-serif;
+
+    --ease: cubic-bezier(.22,1,.36,1);
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    background: var(--paper);
+
+    color: var(--ink);
+
+    font-family: var(--sans);
+
+    overflow-x: hidden;
+
+}
+
+img {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+}
+
+a {
+
+    color: inherit;
+
+    text-decoration: none;
+
+}
+
+button {
+
+    font-family: inherit;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    height: 90px;
+
+    padding: 0 4vw;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+
+    align-items: center;
+
+    border-bottom: 1px solid var(--line);
+
+    background: rgba(241,238,231,.88);
+
+    backdrop-filter: blur(14px);
+
+    z-index: 1000;
+
+}
+
+.brand {
+
+    font-family: var(--serif);
+
+    font-size: 2rem;
+
+    font-weight: 500;
+
+    letter-spacing: -.04em;
+
+}
+
+.header-center {
+
+    text-align: center;
+
+    font-size: .55rem;
+
+    letter-spacing: .18em;
+
+}
+
+.menu-button {
+
+    justify-self: end;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: .55rem;
+
+    letter-spacing: .15em;
+
+}
+
+.menu-icon {
+
+    width: 30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+.menu-icon i {
+
+    display: block;
+
+    width: 100%;
+
+    height: 1px;
+
+    background: var(--ink);
+
+}
+
+
+/* =========================================================
+   MENU PANEL
+========================================================= */
+
+.menu-panel {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: var(--ink);
+
+    color: var(--paper);
+
+    z-index: 2000;
+
+    transform: translateY(-100%);
+
+    transition: transform .8s var(--ease);
+
+}
+
+.menu-panel.open {
+
+    transform: translateY(0);
+
+}
+
+.menu-panel-inner {
+
+    height: 100%;
+
+    padding: 35px 5vw;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+.menu-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: .55rem;
+
+    letter-spacing: .18em;
+
+}
+
+.menu-top button {
+
+    border: 0;
+
+    background: none;
+
+    color: var(--paper);
+
+    cursor: pointer;
+
+    font-size: .55rem;
+
+    letter-spacing: .15em;
+
+}
+
+.menu-panel nav {
+
+    margin-top: auto;
+
+    margin-bottom: auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+.menu-panel nav a {
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 25px;
+
+    width: max-content;
+
+    font-family: var(--serif);
+
+    font-size: clamp(4rem,8vw,8rem);
+
+    line-height: .82;
+
+    font-weight: 300;
+
+    transition: color .3s ease;
+
+}
+
+.menu-panel nav a:hover {
+
+    color: #b9a9a0;
+
+}
+
+.menu-panel nav small {
+
+    font-family: var(--sans);
+
+    font-size: .55rem;
+
+    color: #a69f95;
+
+}
+
+.menu-bottom {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: .5rem;
+
+    letter-spacing: .18em;
+
+    color: #a69f95;
+
+}
+
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+.hero,
+.introduction,
+.editorial,
+.selected-work,
+.disciplines,
+.philosophy {
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+.section-label {
+
+    font-size: .55rem;
+
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
+
+    color: var(--soft-ink);
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    position: relative;
+
+    min-height: 100svh;
+
+    padding-top: 90px;
+
+    display: grid;
+
+    grid-template-columns: 43% 57%;
+
+    overflow: hidden;
+
+}
+
+.hero-top {
+
+    position: absolute;
+
+    top: 110px;
+
+    left: 4vw;
+
+    right: 4vw;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: .5rem;
+
+    letter-spacing: .16em;
+
+    z-index: 3;
+
+}
+
+.hero-image {
+
+    position: relative;
+
+    height: calc(100svh - 90px);
+
+    min-height: 650px;
+
+    overflow: hidden;
+
+}
+
+.hero-image img {
+
+    transform: scale(1.08);
+
+    animation: heroImage 2s var(--ease) forwards;
+
+}
+
+@keyframes heroImage {
+
+    to {
+
+        transform: scale(1);
+
+    }
+
+}
+
+.image-number {
+
+    position: absolute;
+
+    right: 25px;
+
+    bottom: 25px;
+
+    color: white;
+
+    font-size: .55rem;
+
+    letter-spacing: .15em;
+
+}
+
+.hero-copy {
+
+    padding:
+
+        190px
+        7vw
+        80px
+        6vw;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+.eyebrow {
+
+    font-size: .55rem;
+
+    letter-spacing: .22em;
+
+    margin-bottom: 35px;
+
+}
+
+.hero h1 {
+
+    font-family: var(--serif);
+
+    font-size: clamp(4.5rem,7vw,8rem);
+
+    font-weight: 300;
+
+    line-height: .75;
+
+    letter-spacing: -.055em;
+
+}
+
+.hero h1 em {
+
+    color: var(--accent);
+
+    font-style: italic;
+
+}
+
+.hero-info {
+
+    margin-top: 70px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 30px;
+
+}
+
+.hero-info p {
+
+    max-width: 230px;
+
+    color: var(--soft-ink);
+
+    font-size: .65rem;
+
+    line-height: 1.8;
+
+}
+
+.editorial-link {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    padding-bottom: 7px;
+
+    border-bottom: 1px solid var(--ink);
+
+    font-size: .55rem;
+
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+}
+
+.editorial-link b {
+
+    font-size: 1rem;
+
+    font-weight: 400;
+
+}
+
+.hero-bottom {
+
+    position: absolute;
+
+    left: 4vw;
+
+    right: 4vw;
+
+    bottom: 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: .5rem;
+
+    letter-spacing: .16em;
+
+    z-index: 3;
+
+}
+
+@media(max-width:900px) {
+
+    .header {
+
+        grid-template-columns: 1fr 1fr;
+
+    }
+
+    .header-center {
+
+        display: none;
+
+    }
+
+    .hero {
+
+        display: flex;
+
+        flex-direction: column;
+
+    }
+
+    .hero-image {
+
+        height: 58vh;
+
+        min-height: 500px;
+
+    }
+
+    .hero-copy {
+
+        padding: 70px 7vw 100px;
+
+    }
+
+    .hero h1 {
+
+        font-size: clamp(4rem,15vw,7rem);
+
+    }
+
+    .hero-info {
+
+        margin-top: 45px;
+
+    }
+
+}
+
+
+/* =========================================================
+   INTRODUCTION
+========================================================= */
+
+.introduction {
+
+    display: grid;
+
+    grid-template-columns: 10% 90%;
+
+    padding: 160px 7vw;
+
+}
+
+.intro-index {
+
+    font-size: .55rem;
+
+    color: var(--muted);
+
+}
+
+.intro-main {
+
+    max-width: 1200px;
+
+}
+
+.intro-main h2 {
+
+    margin-top: 50px;
+
+    font-family: var(--serif);
+
+    font-size: clamp(5rem,9vw,10rem);
+
+    line-height: .75;
+
+    font-weight: 300;
+
+    letter-spacing: -.055em;
+
+}
+
+.intro-main h2 span {
+
+    color: var(--accent);
+
+}
+
+.intro-main h2 i {
+
+    font-style: italic;
+
+}
+
+.intro-footer {
+
+    margin-top: 100px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+}
+
+.intro-footer p {
+
+    max-width: 430px;
+
+    font-size: .72rem;
+
+    line-height: 2;
+
+    color: var(--soft-ink);
+
+}
+
+@media(max-width:800px) {
+
+    .introduction {
+
+        grid-template-columns: 1fr;
+
+        padding: 110px 7vw;
+
+    }
+
+    .intro-index {
+
+        margin-bottom: 50px;
+
+    }
+
+    .intro-main h2 {
+
+        font-size: clamp(4.5rem,17vw,7rem);
+
+    }
+
+    .intro-footer {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 45px;
+
+        margin-top: 70px;
+
+    }
+
+}
+
+
+/* =========================================================
+   EDITORIAL
+========================================================= */
+
+.editorial {
+
+    position: relative;
+
+    height: 1100px;
+
+    background: var(--paper-dark);
+
+    overflow: hidden;
+
+}
+
+.editorial-caption {
+
+    position: absolute;
+
+    top: 40px;
+
+    left: 7vw;
+
+    right: 7vw;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: .5rem;
+
+    letter-spacing: .17em;
+
+    z-index: 4;
+
+}
+
+.editorial-image {
+
+    position: absolute;
+
+    overflow: hidden;
+
+}
+
+.editorial-image img {
+
+    transition: transform 1.4s var(--ease);
+
+}
+
+.editorial-image:hover img {
+
+    transform: scale(1.04);
+
+}
+
+.image-one {
+
+    width: 39%;
+
+    height: 67%;
+
+    left: 8%;
+
+    top: 13%;
+
+}
+
+.image-two {
+
+    width: 25%;
+
+    height: 38%;
+
+    right: 10%;
+
+    top: 8%;
+
+}
+
+.image-three {
+
+    width: 27%;
+
+    height: 43%;
+
+    right: 4%;
+
+    bottom: 7%;
+
+}
+
+.editorial-quote {
+
+    position: absolute;
+
+    left: 48%;
+
+    top: 55%;
+
+    width: 230px;
+
+    z-index: 5;
+
+}
+
+.editorial-quote p {
+
+    font-family: var(--serif);
+
+    font-size: 2rem;
+
+    line-height: .9;
+
+    font-style: italic;
+
+}
+
+@media(max-width:700px) {
+
+    .editorial {
+
+        height: 850px;
+
+    }
+
+    .image-one {
+
+        width: 60%;
+
+        height: 55%;
+
+        left: 5%;
+
+        top: 15%;
+
+    }
+
+    .image-two {
+
+        width: 43%;
+
+        height: 28%;
+
+        right: 3%;
+
+        top: 5%;
+
+    }
+
+    .image-three {
+
+        width: 45%;
+
+        height: 32%;
+
+        right: 0;
+
+        bottom: 7%;
+
+    }
+
+    .editorial-quote {
+
+        left: 42%;
+
+        top: 57%;
+
+    }
+
+}
+
+
+/* =========================================================
+   SELECTED WORK
+========================================================= */
+
+.selected-work {
+
+    padding: 150px 7vw;
+
+}
+
+.work-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    margin-bottom: 100px;
+
+}
+
+.work-heading h2 {
+
+    margin-top: 35px;
+
+    font-family: var(--serif);
+
+    font-size: clamp(5rem,8vw,9rem);
+
+    font-weight: 300;
+
+    line-height: .75;
+
+    letter-spacing: -.05em;
+
+}
+
+.work-heading h2 i {
+
+    color: var(--accent);
+
+    font-style: italic;
+
+}
+
+.work-count {
+
+    font-size: .5rem;
+
+    color: var(--muted);
+
+}
+
+.work-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(12,1fr);
+
+    gap: 70px 30px;
+
+}
+
+.work-card a {
+
+    display: block;
+
+}
+
+.work-large {
+
+    grid-column: 1 / 8;
+
+}
+
+.work-small {
+
+    grid-column: 9 / 13;
+
+    margin-top: 180px;
+
+}
+
+.work-wide {
+
+    grid-column: 3 / 11;
+
+}
+
+.work-image {
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.work-large .work-image {
+
+    height: 700px;
+
+}
+
+.work-small .work-image {
+
+    height: 550px;
+
+}
+
+.work-wide .work-image {
+
+    height: 600px;
+
+}
+
+.work-image img {
+
+    transition: transform 1.2s var(--ease);
+
+}
+
+.work-card:hover img {
+
+    transform: scale(1.04);
+
+}
+
+.work-number {
+
+    position: absolute;
+
+    right: 20px;
+
+    top: 20px;
+
+    color: white;
+
+    font-size: .55rem;
+
+}
+
+.work-details {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    padding-top: 20px;
+
+}
+
+.work-details h3 {
+
+    font-family: var(--serif);
+
+    font-size: 2rem;
+
+    font-weight: 400;
+
+}
+
+.work-details p {
+
+    margin-top: 5px;
+
+    font-size: .5rem;
+
+    letter-spacing: .1em;
+
+    color: var(--muted);
+
+}
+
+.work-details > span {
+
+    font-size: 1.1rem;
+
+}
+
+.work-footer {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 120px;
+
+}
+
+.outline-button {
+
+    border: 1px solid var(--ink);
+
+    padding: 18px 25px;
+
+    display: inline-flex;
+
+    gap: 40px;
+
+    font-size: .55rem;
+
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+
+}
+
+@media(max-width:800px) {
+
+    .selected-work {
+
+        padding: 110px 7vw;
+
+    }
+
+    .work-heading {
+
+        margin-bottom: 70px;
+
+    }
+
+    .work-heading h2 {
+
+        font-size: clamp(4rem,15vw,7rem);
+
+    }
+
+    .work-grid {
+
+        display: block;
+
+    }
+
+    .work-card {
+
+        margin: 0 0 70px;
+
+    }
+
+    .work-large .work-image,
+    .work-small .work-image,
+    .work-wide .work-image {
+
+        height: 500px;
+
+    }
+
+}
+
+
+/* =========================================================
+   DISCIPLINES
+========================================================= */
+
+.disciplines {
+
+    background: var(--ink);
+
+    color: var(--paper);
+
+}
+
+.discipline-intro {
+
+    padding: 100px 7vw;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid rgba(241,238,231,.18);
+
+}
+
+.discipline-intro .section-label {
+
+    color: #bdb8ae;
+
+}
+
+.discipline-intro p {
+
+    font-family: var(--serif);
+
+    font-size: 2rem;
+
+    font-style: italic;
+
+}
+
+.discipline {
+
+    min-height: 700px;
+
+    display: grid;
+
+    grid-template-columns: 8% 40% 1fr;
+
+    gap: 5vw;
+
+    padding: 100px 7vw;
+
+    align-items: center;
+
+    border-bottom: 1px solid rgba(241,238,231,.18);
+
+}
+
+.discipline-number {
+
+    font-size: .55rem;
+
+    color: #aaa59c;
+
+}
+
+.discipline-image {
+
+    position: relative;
+
+    height: 600px;
+
+}
+
+.discipline-content {
+
+    max-width: 430px;
+
+}
+
+.discipline-content h2 {
+
+    font-family: var(--serif);
+
+    font-size: clamp(4rem,6vw,7rem);
+
+    font-weight: 300;
+
+    line-height: .8;
+
+    letter-spacing: -.05em;
+
+}
+
+.discipline-content p {
+
+    margin: 50px 0;
+
+    color: #aaa59c;
+
+    font-size: .7rem;
+
+    line-height: 2;
+
+}
+
+.discipline .editorial-link {
+
+    color: var(--paper);
+
+    border-color: #aaa59c;
+
+}
+
+.film {
+
+    grid-template-columns: 8% 1fr 40%;
+
+}
+
+.film .discipline-image {
+
+    order: 3;
+
+}
+
+.play-button {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform: translate(-50%,-50%);
+
+    width: 110px;
+
+    height: 110px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.6);
+
+    background: rgba(0,0,0,.2);
+
+    color: white;
+
+    font-size: .55rem;
+
+    letter-spacing: .12em;
+
+    cursor: pointer;
+
+}
+
+@media(max-width:800px) {
+
+    .discipline,
+    .film {
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+    .discipline-image {
+
+        order: initial;
+
+        height: 500px;
+
+    }
+
+    .film .discipline-image {
+
+        order: initial;
+
+    }
+
+    .discipline-content {
+
+        max-width: none;
+
+    }
+
+}
+
+
+/* =========================================================
+   PHILOSOPHY
+========================================================= */
+
+.philosophy {
+
+    padding: 120px 7vw 170px;
+
+}
+
+.philosophy-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: .5rem;
+
+    letter-spacing: .16em;
+
+    color: var(--muted);
+
+}
+
+.philosophy-content {
+
+    margin-top: 130px;
+
+    display: grid;
+
+    grid-template-columns: 2fr 1fr;
+
+    gap: 10vw;
+
+    align-items: end;
+
+}
+
+.philosophy-content h2 {
+
+    font-family: var(--serif);
+
+    font-size: clamp(5rem,9vw,10rem);
+
+    font-weight: 300;
+
+    line-height: .7;
+
+    letter-spacing: -.06em;
+
+}
+
+.philosophy-content h2 span {
+
+    display: block;
+
+}
+
+.philosophy-content h2 span:nth-child(2) {
+
+    margin-left: 15%;
+
+    color: var(--accent);
+
+}
+
+.philosophy-content h2 span:nth-child(3) {
+
+    margin-left: 30%;
+
+}
+
+.philosophy-content h2 span:nth-child(4) {
+
+    margin-left: 45%;
+
+    font-style: italic;
+
+}
+
+.philosophy-content p {
+
+    font-size: .7rem;
+
+    line-height: 2;
+
+    color: var(--soft-ink);
+
+    max-width: 260px;
+
+}
+
+@media(max-width:800px) {
+
+    .philosophy-content {
+
+        display: block;
+
+        margin-top: 90px;
+
+    }
+
+    .philosophy-content h2 {
+
+        font-size: clamp(4rem,16vw,7rem);
+
+    }
+
+    .philosophy-content h2 span:nth-child(2) {
+
+        margin-left: 5%;
+
+    }
+
+    .philosophy-content h2 span:nth-child(3) {
+
+        margin-left: 10%;
+
+    }
+
+    .philosophy-content h2 span:nth-child(4) {
+
+        margin-left: 15%;
+
+    }
+
+    .philosophy-content p {
+
+        margin-top: 80px;
+
+    }
+
+}
+
+
+/* =========================================================
+   FINAL IMAGE
+========================================================= */
+
+.final-image {
+
+    height: 100svh;
+
+    min-height: 650px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    color: white;
+
+}
+
+.final-image > img {
+
+    transition: transform 2s var(--ease);
+
+}
+
+.final-image:hover > img {
+
+    transform: scale(1.03);
+
+}
+
+.final-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.45);
+
+}
+
+.final-content {
+
+    position: absolute;
+
+    left: 7vw;
+
+    bottom: 10%;
+
+}
+
+.final-content > span {
+
+    font-size: .55rem;
+
+    letter-spacing: .2em;
+
+}
+
+.final-content h2 {
+
+    margin: 30px 0 50px;
+
+    font-family: var(--serif);
+
+    font-size: clamp(5rem,9vw,10rem);
+
+    font-weight: 300;
+
+    line-height: .7;
+
+    letter-spacing: -.055em;
+
+}
+
+.final-content h2 i {
+
+    color: #d7c1ba;
+
+}
+
+.light-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 40px;
+
+    background: var(--paper);
+
+    color: var(--ink);
+
+    padding: 19px 25px;
+
+    font-size: .55rem;
+
+    letter-spacing: .13em;
+
+    text-transform: uppercase;
+
+}
+
+.light-button span {
+
+    font-size: 1rem;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    padding: 100px 7vw 30px;
+
+    background: var(--ink);
+
+    color: var(--paper);
+
+}
+
+.footer-brand {
+
+    padding-bottom: 100px;
+
+    border-bottom: 1px solid rgba(241,238,231,.18);
+
+}
+
+.footer-brand h2 {
+
+    font-family: var(--serif);
+
+    font-size: 8rem;
+
+    font-weight: 300;
+
+    line-height: .7;
+
+}
+
+.footer-brand p {
+
+    margin-top: 30px;
+
+    color: #aaa59c;
+
+    font-size: .55rem;
+
+    letter-spacing: .18em;
+
+}
+
+.footer-columns {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+
+    gap: 50px;
+
+    padding: 70px 0;
+
+    border-bottom: 1px solid rgba(241,238,231,.18);
+
+}
+
+.footer-columns div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+}
+
+.footer-columns span {
+
+    color: #aaa59c;
+
+    font-size: .5rem;
+
+    letter-spacing: .18em;
+
+    margin-bottom: 25px;
+
+}
+
+.footer-columns a,
+.footer-columns p {
+
+    font-size: .6rem;
+
+    line-height: 2;
+
+    color: #ddd8cf;
+
+}
+
+.footer-bottom {
+
+    padding-top: 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: .5rem;
+
+    letter-spacing: .14em;
+
+    color: #77736c;
+
+}
+
+@media(max-width:700px) {
+
+    .footer-brand h2 {
+
+        font-size: 6rem;
+
+    }
+
+    .footer-columns {
+
+        grid-template-columns: 1fr 1fr;
+
+    }
+
+    .footer-bottom {
+
+        flex-direction: column;
+
+        gap: 15px;
+
+    }
+
+}
+
+
+/* =========================================================
+   VIDEO MODAL
+========================================================= */
+
+.video-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 5000;
+
+    background: rgba(0,0,0,.96);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 5vw;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+
+        opacity .5s ease,
+        visibility .5s;
+
+}
+
+.video-modal.open {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+.video-modal video {
+
+    width: min(1200px,90vw);
+
+    max-height: 85vh;
+
+}
+
+.video-modal button {
+
+    position: absolute;
+
+    top: 30px;
+
+    right: 35px;
+
+    border: 0;
+
+    background: none;
+
+    color: white;
+
+    font-size: .6rem;
+
+    letter-spacing: .15em;
+
+    cursor: pointer;
+
+}
