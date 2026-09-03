@@ -1,206 +1,151 @@
-/* =====================================================
-   XCY EVENTS
-   CONTACT PAGE JAVASCRIPT
-===================================================== */
+/* =========================================================
+   XCY EVENTS — CONTACT
+   MASTER INTERACTION SYSTEM
+========================================================= */
 
 
-/* =====================================================
+/* =========================================================
    MENU
-===================================================== */
+========================================================= */
 
-const menuToggle =
-    document.getElementById("menuToggle");
+const menuButton = document.getElementById("menuButton");
+const menuPanel = document.getElementById("menuPanel");
+const menuClose = document.getElementById("menuClose");
 
-const menuOverlay =
-    document.getElementById("menuOverlay");
 
-const menuClose =
-    document.getElementById("menuClose");
 
+function openMenu() {
 
-if (menuToggle && menuOverlay) {
+    menuPanel.classList.add("open");
 
-    menuToggle.addEventListener("click", () => {
+    document.body.classList.add("menu-open");
 
-        menuOverlay.classList.add("open");
-
-        document.body.classList.add("menu-open");
-
-    });
-
-}
-
-
-if (menuClose && menuOverlay) {
-
-    menuClose.addEventListener("click", () => {
-
-        menuOverlay.classList.remove("open");
-
-        document.body.classList.remove("menu-open");
-
-    });
-
-}
-
-
-/* Close menu when clicking a link */
-
-document
-    .querySelectorAll(".fullscreen-nav a")
-    .forEach(link => {
-
-        link.addEventListener("click", () => {
-
-            menuOverlay.classList.remove("open");
-
-            document.body.classList.remove("menu-open");
-
-        });
-
-    });
-
-
-
-/* =====================================================
-   ESCAPE KEY
-===================================================== */
-
-document.addEventListener("keydown", event => {
-
-    if (event.key === "Escape") {
-
-        menuOverlay.classList.remove("open");
-
-        document.body.classList.remove("menu-open");
-
-    }
-
-});
-
-
-
-/* =====================================================
-   FORM
-===================================================== */
-
-const projectForm =
-    document.getElementById("projectForm");
-
-const formSuccess =
-    document.getElementById("formSuccess");
-
-
-if (projectForm) {
-
-    projectForm.addEventListener("submit", event => {
-
-        event.preventDefault();
-
-
-        const button =
-            projectForm.querySelector(
-                "button[type='submit']"
-            );
-
-
-        const buttonText =
-            button.querySelector("span");
-
-
-        button.disabled = true;
-
-        buttonText.textContent = "SENDING...";
-
-
-        setTimeout(() => {
-
-            projectForm.style.display = "none";
-
-            formSuccess.classList.add("active");
-
-
-            formSuccess.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-
-
-        }, 1200);
-
-    });
-
-}
-
-
-
-/* =====================================================
-   DATE
-===================================================== */
-
-const eventDate =
-    document.getElementById("eventDate");
-
-
-if (eventDate) {
-
-    const today =
-        new Date()
-            .toISOString()
-            .split("T")[0];
-
-
-    eventDate.min = today;
-
-}
-
-
-
-/* =====================================================
-   HERO PARALLAX
-===================================================== */
-
-const heroImage =
-    document.querySelector(
-        ".hero-background img"
+    menuButton.setAttribute(
+        "aria-expanded",
+        "true"
     );
 
+    menuPanel.setAttribute(
+        "aria-hidden",
+        "false"
+    );
 
-window.addEventListener(
-    "scroll",
-    () => {
-
-        if (!heroImage) return;
-
-
-        const scroll =
-            window.scrollY;
+}
 
 
-        if (scroll < window.innerHeight) {
 
-            heroImage.style.transform =
-                `translateY(${scroll * 0.08}px) scale(1.02)`;
+function closeMenu() {
+
+    menuPanel.classList.remove("open");
+
+    document.body.classList.remove("menu-open");
+
+    menuButton.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+    menuPanel.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+}
+
+
+
+menuButton?.addEventListener(
+    "click",
+    openMenu
+);
+
+
+
+menuClose?.addEventListener(
+    "click",
+    closeMenu
+);
+
+
+
+/* =========================================================
+   CLOSE MENU — NAVIGATION
+========================================================= */
+
+document
+    .querySelectorAll(".menu-nav a")
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            closeMenu
+        );
+
+    });
+
+
+
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape" &&
+            menuPanel.classList.contains("open")
+        ) {
+
+            closeMenu();
 
         }
 
-    },
-    {
-        passive: true
     }
 );
 
 
 
-/* =====================================================
-   REVEAL ANIMATIONS
-===================================================== */
+/* =========================================================
+   SCROLL REVEALS
+   SAME SYSTEM AS INDEX
+========================================================= */
 
-const revealElements =
+const scrollElements =
     document.querySelectorAll(
-        ".contact-introduction, .project-section, .direct-contact, .location-section, .final-contact"
+        ".scroll-reveal"
     );
 
+
+
+const imageElements =
+    document.querySelectorAll(
+        ".image-scroll-reveal"
+    );
+
+
+
+const prefersReducedMotion =
+    window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    );
+
+
+
+if (prefersReducedMotion.matches) {
+
+    document.body.classList.add(
+        "reduce-motion"
+    );
+
+}
+
+
+
+/* =========================================================
+   TEXT REVEAL OBSERVER
+========================================================= */
 
 const revealObserver =
     new IntersectionObserver(
@@ -208,13 +153,62 @@ const revealObserver =
 
             entries.forEach(entry => {
 
-                if (entry.isIntersecting) {
+                if (
+                    entry.isIntersecting
+                ) {
 
                     entry.target.classList.add(
-                        "visible"
+                        "is-visible"
                     );
 
                     revealObserver.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.12,
+            rootMargin: "0px 0px -40px 0px"
+        }
+    );
+
+
+
+scrollElements.forEach(
+    element => {
+
+        revealObserver.observe(
+            element
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   IMAGE REVEAL OBSERVER
+========================================================= */
+
+const imageObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (
+                    entry.isIntersecting
+                ) {
+
+                    entry.target.classList.add(
+                        "image-visible"
+                    );
+
+                    imageObserver.unobserve(
                         entry.target
                     );
 
@@ -229,42 +223,214 @@ const revealObserver =
     );
 
 
-revealElements.forEach(element => {
 
-    revealObserver.observe(element);
+imageElements.forEach(
+    element => {
 
-});
+        imageObserver.observe(
+            element
+        );
+
+    }
+);
 
 
 
-/* =====================================================
-   FINAL CTA
-===================================================== */
+/* =========================================================
+   STAGGER CONTACT ITEMS
+========================================================= */
 
 document
-    .querySelectorAll('a[href="#projectForm"]')
+    .querySelectorAll(".contact-item")
+    .forEach(
+        (item, index) => {
+
+            item.style.setProperty(
+                "--reveal-delay",
+                `${index * 100}ms`
+            );
+
+        }
+    );
+
+
+
+/* =========================================================
+   SMOOTH INTERNAL LINKS
+========================================================= */
+
+document
+    .querySelectorAll(
+        'a[href^="#"]'
+    )
     .forEach(link => {
 
-        link.addEventListener("click", event => {
+        link.addEventListener(
+            "click",
+            event => {
 
-            event.preventDefault();
+                const targetId =
+                    link.getAttribute(
+                        "href"
+                    );
 
+                if (
+                    !targetId ||
+                    targetId === "#"
+                ) {
+                    return;
+                }
 
-            const form =
-                document.getElementById(
-                    "projectForm"
-                );
+                const target =
+                    document.querySelector(
+                        targetId
+                    );
 
+                if (!target) {
+                    return;
+                }
 
-            if (form) {
+                event.preventDefault();
 
-                form.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
+                target.scrollIntoView({
+                    behavior: prefersReducedMotion.matches
+                        ? "auto"
+                        : "smooth"
                 });
 
             }
-
-        });
+        );
 
     });
+
+
+
+/* =========================================================
+   HERO PARALLAX
+========================================================= */
+
+const heroImage =
+    document.querySelector(
+        ".hero-background img"
+    );
+
+
+
+if (
+    heroImage &&
+    !prefersReducedMotion.matches
+) {
+
+    let ticking = false;
+
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            if (ticking) {
+                return;
+            }
+
+
+            window.requestAnimationFrame(
+                () => {
+
+                    const scrollY =
+                        window.scrollY;
+
+
+                    if (
+                        scrollY <=
+                        window.innerHeight
+                    ) {
+
+                        heroImage.style.transform =
+                            `scale(1.04) translateY(${scrollY * 0.06}px)`;
+
+                    }
+
+
+                    ticking = false;
+
+                }
+            );
+
+
+            ticking = true;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   REDUCED MOTION LIVE CHANGE
+========================================================= */
+
+prefersReducedMotion.addEventListener(
+    "change",
+    event => {
+
+        if (event.matches) {
+
+            document.body.classList.add(
+                "reduce-motion"
+            );
+
+        } else {
+
+            document.body.classList.remove(
+                "reduce-motion"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   CONTACT ITEM HOVER
+========================================================= */
+
+document
+    .querySelectorAll(".contact-item")
+    .forEach(item => {
+
+        item.addEventListener(
+            "mouseenter",
+            () => {
+
+                item.style.zIndex = "2";
+
+            }
+        );
+
+
+        item.addEventListener(
+            "mouseleave",
+            () => {
+
+                item.style.zIndex = "";
+
+            }
+        );
+
+    });
+
+
+
+/* =========================================================
+   PAGE READY
+========================================================= */
+
+document.documentElement.classList.add(
+    "page-ready"
+);

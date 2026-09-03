@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
@@ -12,15 +13,15 @@
 
     <meta
         name="description"
-        content="XCY EVENTS is a premium photography and videography company based in Uganda, serving clients across East Africa."
+        content="XCY EVENTS is a professional photography and videography company based in Uganda, serving clients across East Africa."
     >
 
-    <!-- Fonts -->
+    <!-- Corporate Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;500&family=Manrope:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
@@ -39,16 +40,26 @@
 <header class="header">
 
     <a href="index.html" class="brand">
-        XCY
+
+        <img
+            src="images/xcylogo.png"
+            alt="XCY Events"
+        >
+
     </a>
 
 
     <div class="header-center">
-        PHOTOGRAPHY / FILM
+        PHOTOGRAPHY &nbsp;/&nbsp; FILM
     </div>
 
 
-    <button class="menu-button" id="menuButton">
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Open menu"
+        aria-expanded="false"
+    >
 
         <span>MENU</span>
 
@@ -78,7 +89,8 @@
             </span>
 
             <button id="closeMenu">
-                CLOSE ×
+                CLOSE
+                <strong>×</strong>
             </button>
 
         </div>
@@ -87,28 +99,47 @@
         <nav>
 
             <a href="index.html">
+
                 <small>01</small>
-                Home
+
+                <span>Home</span>
+
             </a>
+
 
             <a href="work.html">
+
                 <small>02</small>
-                Work
+
+                <span>Gallery</span>
+
             </a>
+
 
             <a href="services.html">
+
                 <small>03</small>
-                Services
+
+                <span>Services</span>
+
             </a>
+
 
             <a href="about.html">
+
                 <small>04</small>
-                About
+
+                <span>About</span>
+
             </a>
 
+
             <a href="contact.html">
+
                 <small>05</small>
-                Contact
+
+                <span>Contact</span>
+
             </a>
 
         </nav>
@@ -136,72 +167,69 @@
 
 
 <!-- =====================================================
-     HERO / OPENING SPREAD
+     HERO
 ====================================================== -->
 
 <section class="hero">
 
-    <div class="hero-top">
-
-        <span>
-            00 / 05
-        </span>
-
-        <span>
-            ACCESS BUILDING · KAMPALA
-        </span>
-
-    </div>
-
-
-    <div class="hero-image">
+    <div class="hero-background">
 
         <img
-            src="images/xcyhero.jpg"
+            src="images/selected1.jpg"
             alt="XCY Events photography"
         >
 
-        <div class="image-number">
-            01
-        </div>
+    </div>
+
+
+    <div class="hero-overlay"></div>
+
+
+    <div class="hero-top">
+
+        <span>
+            XCY EVENTS
+        </span>
+
+        <span>
+            KAMPALA · UGANDA
+        </span>
 
     </div>
 
 
-    <div class="hero-copy">
+    <div class="hero-content">
 
-        <p class="eyebrow">
-            XCY EVENTS
-        </p>
+        <div class="hero-label">
+            PHOTOGRAPHY · CINEMATOGRAPHY · EVENTS
+        </div>
 
 
         <h1>
-
-            The art of
+            Capturing
             <br>
-
-            <em>preserving</em>
-
+            moments that
             <br>
-
-            a moment.
-
+            <span>matter.</span>
         </h1>
 
 
-        <div class="hero-info">
+        <div class="hero-description">
 
             <p>
-                Photography & cinematography
-                created for moments that
-                deserve to remain.
+                Professional photography and
+                cinematography created for
+                people, brands and events.
             </p>
 
 
-            <a href="work.html" class="editorial-link">
+            <a
+                href="work.html"
+                class="hero-button"
+            >
 
                 <span>
-                    Explore the work
+                    Explore our work
                 </span>
 
                 <b>↗</b>
@@ -242,45 +270,35 @@
 
     <div class="intro-main">
 
-        <p class="section-label">
+        <div class="section-label">
             OUR APPROACH
-        </p>
+        </div>
 
 
         <h2>
-
-            We believe
+            Professional imagery
             <br>
-
-            <span>great images</span>
-
+            built around
             <br>
-
-            should feel
-            <br>
-
-            <i>alive.</i>
-
+            <span>your story.</span>
         </h2>
 
 
         <div class="intro-footer">
 
             <p>
-
-                XCY EVENTS is a photography and
-                videography company built around
-                craft, precision and storytelling.
-
-                From intimate celebrations to
-                large-scale productions, we create
-                imagery that carries the feeling
-                of the moment long after it has passed.
-
+                XCY EVENTS is a professional photography
+                and cinematography company focused on
+                creating high-quality visual content for
+                individuals, events, organizations and
+                corporate brands.
             </p>
 
 
-            <a href="about.html" class="editorial-link">
+            <a
+                href="about.html"
+                class="editorial-link"
+            >
 
                 <span>
                     More about XCY
@@ -299,7 +317,7 @@
 
 
 <!-- =====================================================
-     EDITORIAL IMAGE COMPOSITION
+     FEATURED PHOTOGRAPHY
 ====================================================== -->
 
 <section class="editorial">
@@ -307,7 +325,7 @@
     <div class="editorial-caption">
 
         <span>
-            FRAME / 01
+            FEATURED WORK
         </span>
 
         <span>
@@ -317,42 +335,62 @@
     </div>
 
 
-    <div class="editorial-image image-one">
+    <div class="editorial-grid">
 
-        <img
-            src="images/indexgalary1.jpg"
-            alt="XCY Events photography"
-        >
+        <div class="editorial-image">
+
+            <img
+                src="images/indexgalary1.jpg"
+                alt="XCY Events photography"
+            >
+
+        </div>
+
+
+        <div class="editorial-image">
+
+            <img
+                src="images/indexgalary2.jpg"
+                alt="XCY Events event photography"
+            >
+
+        </div>
+
+
+        <div class="editorial-image">
+
+            <img
+                src="images/indexgalary3.jpg"
+                alt="XCY Events professional photography"
+            >
+
+        </div>
 
     </div>
 
 
-    <div class="editorial-image image-two">
+    <div class="editorial-footer">
 
-        <img
-            src="images/indexgalary2.jpg"
-            alt="XCY Events photography"
-        >
+        <div>
 
-    </div>
+            <span class="section-label">
+                VISUAL STORYTELLING
+            </span>
 
+            <h2>
+                Moments
+                <br>
+                <span>in motion.</span>
+            </h2>
 
-    <div class="editorial-image image-three">
+        </div>
 
-        <img
-            src="images/indexgalary3.jpg"
-            alt="XCY Events photography"
-        >
-
-    </div>
-
-
-    <div class="editorial-quote">
 
         <p>
-            “The photograph
-            remembers what
-            time forgets.”
+            From corporate events and celebrations
+            to personal portraits and commercial
+            campaigns, we create visual stories
+            with purpose and precision.
         </p>
 
     </div>
@@ -378,7 +416,7 @@
             <h2>
                 Stories
                 <br>
-                <i>worth keeping.</i>
+                <span>worth keeping.</span>
             </h2>
 
         </div>
@@ -424,7 +462,7 @@
                         </h3>
 
                         <p>
-                            Love / Emotion / Celebration
+                            LOVE / EMOTION / CELEBRATION
                         </p>
 
                     </div>
@@ -470,7 +508,7 @@
                         </h3>
 
                         <p>
-                            Energy / People / Atmosphere
+                            ENERGY / PEOPLE / ATMOSPHERE
                         </p>
 
                     </div>
@@ -516,7 +554,7 @@
                         </h3>
 
                         <p>
-                            Character / Identity / Light
+                            CHARACTER / IDENTITY / LIGHT
                         </p>
 
                     </div>
@@ -562,7 +600,7 @@
                         </h3>
 
                         <p>
-                            Brands / Campaigns / Visual Identity
+                            BRANDS / CAMPAIGNS / VISUAL IDENTITY
                         </p>
 
                     </div>
@@ -583,7 +621,10 @@
 
     <div class="work-footer">
 
-        <a href="work.html" class="outline-button">
+        <a
+            href="work.html"
+            class="outline-button"
+        >
 
             View complete portfolio
 
@@ -610,8 +651,9 @@
         </span>
 
         <p>
-            Two disciplines.
-            One visual language.
+            Photography & cinematography
+            <br>
+            for every important story.
         </p>
 
     </div>
@@ -628,7 +670,7 @@
 
             <img
                 src="images/indexphotography.jpg"
-                alt="XCY photography"
+                alt="XCY professional photography"
             >
 
         </div>
@@ -636,22 +678,26 @@
 
         <div class="discipline-content">
 
+            <div class="section-label">
+                STILL IMAGES
+            </div>
+
             <h2>
                 Photography
             </h2>
 
             <p>
-
-                Still images with atmosphere,
-                intention and character.
-
-                From weddings and portraits to
-                events, fashion and commercial work.
-
+                Professional photography for
+                weddings, corporate events,
+                portraits, fashion, products
+                and commercial campaigns.
             </p>
 
 
-            <a href="services.html" class="editorial-link">
+            <a
+                href="services.html"
+                class="editorial-link"
+            >
 
                 <span>
                     Photography services
@@ -676,20 +722,26 @@
 
         <div class="discipline-content">
 
+            <div class="section-label">
+                MOVING IMAGES
+            </div>
+
             <h2>
                 Film
             </h2>
 
             <p>
-
-                Moving images designed to
-                preserve not only what happened,
-                but how it felt.
-
+                Cinematography and video
+                production designed to communicate
+                your story, brand and experience
+                with clarity and impact.
             </p>
 
 
-            <a href="services.html" class="editorial-link">
+            <a
+                href="services.html"
+                class="editorial-link"
+            >
 
                 <span>
                     Film & video
@@ -708,6 +760,7 @@
                 src="images/indexvideography.jpg"
                 alt="XCY cinematography"
             >
+
 
             <button
                 class="play-button"
@@ -737,7 +790,7 @@
         </span>
 
         <span>
-            THE XCY PHILOSOPHY
+            THE XCY APPROACH
         </span>
 
     </div>
@@ -745,27 +798,34 @@
 
     <div class="philosophy-content">
 
-        <h2>
+        <div>
 
-            <span>Observe.</span>
+            <div class="section-label">
+                OUR STANDARD
+            </div>
 
-            <span>Feel.</span>
+            <h2>
 
-            <span>Frame.</span>
+                <span>Observe.</span>
 
-            <span>Preserve.</span>
+                <span>Understand.</span>
 
-        </h2>
+                <span>Create.</span>
+
+                <span>Deliver.</span>
+
+            </h2>
+
+        </div>
 
 
         <p>
-
-            We approach every assignment with
-            the same belief: the best photographs
-            are not forced.
-
-            They are discovered.
-
+            Every project deserves attention
+            to detail. We combine technical
+            expertise, creativity and a clear
+            understanding of our clients'
+            objectives to deliver visual work
+            that communicates.
         </p>
 
     </div>
@@ -795,20 +855,20 @@
             XCY EVENTS
         </span>
 
-        <h2>
 
+        <h2>
             Let's create
             <br>
-
             something
             <br>
-
-            <i>worth remembering.</i>
-
+            <span>meaningful.</span>
         </h2>
 
 
-        <a href="contact.html" class="light-button">
+        <a
+            href="contact.html"
+            class="light-button"
+        >
 
             Start a conversation
 
@@ -819,7 +879,6 @@
     </div>
 
 </section>
-
 
 
 </main>
@@ -834,12 +893,13 @@
 
     <div class="footer-brand">
 
-        <h2>
-            XCY
-        </h2>
+        <img
+            src="images/xcylogo.png"
+            alt="XCY Events"
+        >
 
         <p>
-            Photography / Film
+            PHOTOGRAPHY / FILM
         </p>
 
     </div>
@@ -928,7 +988,10 @@
      VIDEO MODAL
 ====================================================== -->
 
-<div class="video-modal" id="videoModal">
+<div
+    class="video-modal"
+    id="videoModal"
+>
 
     <button id="closeVideo">
         CLOSE ×
@@ -946,6 +1009,8 @@
             type="video/mp4"
         >
 
+        Your browser does not support video.
+
     </video>
 
 </div>
@@ -953,6 +1018,35 @@
 
 
 <script src="index.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "PhotographyBusiness",
+  "name": "XCY EVENTS",
+  "url": "https://www.xcyevents.com",
+  "logo": "YOUR-LOGO-URL",
+  "description": "Professional wedding photography and cinematography company based in Kampala, Uganda.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Access Building, Rubaga Road, Opp. Hotel Sojovalo",
+    "addressLocality": "Kampala",
+    "addressCountry": "UG"
+  },
+  "areaServed": [
+    "Kampala",
+    "Uganda"
+  ],
+  "knowsAbout": [
+    "Wedding Photography",
+    "Wedding Videography",
+    "Wedding Cinematography",
+    "Introduction Photography",
+    "Event Photography",
+    "Portrait Photography"
+  ]
+}
+</script>
 
 </body>
 </html>

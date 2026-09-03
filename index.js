@@ -1,6 +1,7 @@
 /* =========================================================
    XCY EVENTS
-   EDITORIAL INTERACTIONS
+   CORPORATE HOMEPAGE INTERACTIONS
+   SCROLL REVEAL SYSTEM
 ========================================================= */
 
 
@@ -18,86 +19,324 @@ const closeMenu =
     document.getElementById("closeMenu");
 
 
-menuButton.addEventListener("click", () => {
+function openMenu() {
+
+    if (!menuPanel) return;
 
     menuPanel.classList.add("open");
 
-    document.body.style.overflow = "hidden";
+    document.body.classList.add("menu-open");
 
-});
+    if (menuButton) {
+        menuButton.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+    }
+
+}
 
 
-closeMenu.addEventListener("click", () => {
+function closeNavigation() {
+
+    if (!menuPanel) return;
 
     menuPanel.classList.remove("open");
 
-    document.body.style.overflow = "";
+    document.body.classList.remove("menu-open");
 
-});
+    if (menuButton) {
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+    }
+
+}
+
+
+if (menuButton) {
+
+    menuButton.addEventListener(
+        "click",
+        openMenu
+    );
+
+}
+
+
+if (closeMenu) {
+
+    closeMenu.addEventListener(
+        "click",
+        closeNavigation
+    );
+
+}
 
 
 /* Close menu when clicking links */
 
-document.querySelectorAll(".menu-panel nav a")
+document
+    .querySelectorAll(".menu-panel nav a")
     .forEach(link => {
 
-        link.addEventListener("click", () => {
-
-            menuPanel.classList.remove("open");
-
-            document.body.style.overflow = "";
-
-        });
+        link.addEventListener(
+            "click",
+            closeNavigation
+        );
 
     });
 
 
-/* Escape */
+/* Escape key */
 
-document.addEventListener("keydown", (event) => {
+document.addEventListener(
+    "keydown",
+    event => {
 
-    if (event.key === "Escape") {
+        if (event.key === "Escape") {
 
-        menuPanel.classList.remove("open");
+            closeNavigation();
 
-        document.body.style.overflow = "";
+            closeVideoModal();
+
+        }
 
     }
+);
 
-});
 
 
 /* =========================================================
-   HERO IMAGE PARALLAX
+   SCROLL REVEAL
+========================================================= */
+
+const revealElements =
+    document.querySelectorAll(
+        `
+        .section-label,
+        .intro-main h2,
+        .intro-footer,
+        .editorial-caption,
+        .editorial-image,
+        .editorial-footer,
+        .work-heading,
+        .work-card,
+        .work-footer,
+        .discipline-intro,
+        .discipline-number,
+        .discipline-image,
+        .discipline-content,
+        .philosophy-top,
+        .philosophy-content,
+        .final-content,
+        .footer-brand,
+        .footer-columns,
+        .footer-bottom
+        `
+    );
+
+
+/* Add initial state */
+
+revealElements.forEach(
+    (element, index) => {
+
+        element.classList.add(
+            "scroll-reveal"
+        );
+
+        /*
+         * Every element gets a tiny stagger.
+         * This keeps the movement elegant
+         * instead of making everything appear
+         * at exactly the same time.
+         */
+
+        element.style.setProperty(
+            "--reveal-delay",
+            `${Math.min(index % 5, 4) * 70}ms`
+        );
+
+    }
+);
+
+
+/* Intersection Observer */
+
+const revealObserver =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (
+                    entry.isIntersecting
+                ) {
+
+                    entry.target.classList.add(
+                        "is-visible"
+                    );
+
+                    revealObserver.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.12,
+
+            rootMargin:
+                "0px 0px -60px 0px"
+
+        }
+
+    );
+
+
+revealElements.forEach(
+    element => {
+
+        revealObserver.observe(
+            element
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   HERO ENTRANCE
+========================================================= */
+
+const heroElements =
+    document.querySelectorAll(
+        `
+        .hero-top,
+        .hero-label,
+        .hero h1,
+        .hero-description,
+        .hero-bottom
+        `
+    );
+
+
+heroElements.forEach(
+    (element, index) => {
+
+        element.classList.add(
+            "hero-reveal"
+        );
+
+        element.style.setProperty(
+            "--hero-delay",
+            `${250 + index * 140}ms`
+        );
+
+    }
+);
+
+
+/* =========================================================
+   HERO PARALLAX
 ========================================================= */
 
 const heroImage =
-    document.querySelector(".hero-image img");
+    document.querySelector(
+        ".hero-background img"
+    );
 
 
-window.addEventListener("scroll", () => {
+let ticking = false;
 
-    if (!heroImage) return;
 
-    if (window.innerWidth < 800) return;
+function updateHeroParallax() {
+
+    if (
+        !heroImage ||
+        window.innerWidth < 800
+    ) {
+
+        ticking = false;
+
+        return;
+
+    }
+
 
     const scroll =
         window.scrollY;
 
-    heroImage.style.transform =
-        `translateY(${scroll * 0.08}px) scale(1.02)`;
 
-});
+    if (
+        scroll <
+        window.innerHeight
+    ) {
+
+        heroImage.style.transform =
+            `translateY(${scroll * 0.045}px) scale(1.02)`;
+
+    }
+
+
+    ticking = false;
+
+}
+
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if (!ticking) {
+
+            window.requestAnimationFrame(
+                updateHeroParallax
+            );
+
+            ticking = true;
+
+        }
+
+    },
+    {
+        passive: true
+    }
+);
+
 
 
 /* =========================================================
    IMAGE REVEAL
 ========================================================= */
 
-const images =
+const revealImages =
     document.querySelectorAll(
-        ".editorial-image img, .work-image img, .discipline-image img"
+        `
+        .editorial-image img,
+        .work-image img,
+        .discipline-image img
+        `
     );
+
+
+revealImages.forEach(
+    image => {
+
+        image.classList.add(
+            "image-scroll-reveal"
+        );
+
+    }
+);
 
 
 const imageObserver =
@@ -107,9 +346,13 @@ const imageObserver =
 
             entries.forEach(entry => {
 
-                if (entry.isIntersecting) {
+                if (
+                    entry.isIntersecting
+                ) {
 
-                    entry.target.style.opacity = "1";
+                    entry.target.classList.add(
+                        "image-visible"
+                    );
 
                     imageObserver.unobserve(
                         entry.target
@@ -122,82 +365,102 @@ const imageObserver =
         },
 
         {
-            threshold: 0.15
+            threshold: 0.15,
+
+            rootMargin:
+                "0px 0px -50px 0px"
+
         }
 
     );
 
 
-images.forEach(image => {
+revealImages.forEach(
+    image => {
 
-    image.style.opacity = "0";
+        imageObserver.observe(
+            image
+        );
 
-    image.style.transition =
-        "opacity 1s cubic-bezier(.22,1,.36,1)";
+    }
+);
 
-    imageObserver.observe(image);
-
-});
 
 
 /* =========================================================
-   SIMPLE TEXT REVEAL
+   WORK IMAGE MOVEMENT
 ========================================================= */
 
-const textElements =
-    document.querySelectorAll(
-        ".intro-main h2, .work-heading h2, .philosophy-content h2"
-    );
+document
+    .querySelectorAll(".work-card")
+    .forEach(card => {
+
+        const image =
+            card.querySelector("img");
+
+        if (!image) return;
 
 
-const textObserver =
-    new IntersectionObserver(
+        card.addEventListener(
+            "mousemove",
+            event => {
 
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.style.opacity = "1";
-
-                    entry.target.style.transform =
-                        "translateY(0)";
-
-                    textObserver.unobserve(
-                        entry.target
-                    );
-
-                }
-
-            });
-
-        },
-
-        {
-            threshold: 0.15
-        }
-
-    );
+                if (
+                    window.innerWidth < 800
+                ) return;
 
 
-textElements.forEach(element => {
+                const rect =
+                    card.getBoundingClientRect();
 
-    element.style.opacity = "0";
 
-    element.style.transform =
-        "translateY(40px)";
+                const x =
+                    (
+                        (
+                            event.clientX -
+                            rect.left
+                        )
+                        /
+                        rect.width
+                        - .5
+                    ) * 4;
 
-    element.style.transition =
-        "opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1)";
 
-    textObserver.observe(element);
+                const y =
+                    (
+                        (
+                            event.clientY -
+                            rect.top
+                        )
+                        /
+                        rect.height
+                        - .5
+                    ) * 4;
 
-});
+
+                image.style.transform =
+                    `scale(1.035) translate(${x}px, ${y}px)`;
+
+            }
+        );
+
+
+        card.addEventListener(
+            "mouseleave",
+            () => {
+
+                image.style.transform =
+                    "scale(1) translate(0,0)";
+
+            }
+        );
+
+    });
+
 
 
 /* =========================================================
-   VIDEO
+   VIDEO MODAL
 ========================================================= */
 
 const playButton =
@@ -215,35 +478,59 @@ const video =
 
 if (playButton) {
 
-    playButton.addEventListener("click", () => {
+    playButton.addEventListener(
+        "click",
+        () => {
 
-        videoModal.classList.add("open");
+            if (!videoModal) return;
 
-        document.body.style.overflow = "hidden";
+            videoModal.classList.add(
+                "open"
+            );
 
-        if (video) {
+            document.body.classList.add(
+                "menu-open"
+            );
 
-            video.play().catch(() => {});
+
+            if (video) {
+
+                video
+                    .play()
+                    .catch(() => {});
+
+            }
 
         }
-
-    });
+    );
 
 }
 
 
 if (closeVideo) {
 
-    closeVideo.addEventListener("click", closeVideoModal);
+    closeVideo.addEventListener(
+        "click",
+        closeVideoModal
+    );
 
 }
 
 
 function closeVideoModal() {
 
-    videoModal.classList.remove("open");
+    if (!videoModal) return;
 
-    document.body.style.overflow = "";
+
+    videoModal.classList.remove(
+        "open"
+    );
+
+
+    document.body.classList.remove(
+        "menu-open"
+    );
+
 
     if (video) {
 
@@ -258,57 +545,41 @@ function closeVideoModal() {
 
 if (videoModal) {
 
-    videoModal.addEventListener("click", event => {
+    videoModal.addEventListener(
+        "click",
+        event => {
 
-        if (event.target === videoModal) {
+            if (
+                event.target === videoModal
+            ) {
 
-            closeVideoModal();
+                closeVideoModal();
+
+            }
 
         }
-
-    });
+    );
 
 }
 
 
+
 /* =========================================================
-   IMAGE HOVER MOVEMENT
+   REDUCED MOTION
 ========================================================= */
 
-document.querySelectorAll(".work-card")
-    .forEach(card => {
-
-        const image =
-            card.querySelector("img");
-
-        if (!image) return;
+const prefersReducedMotion =
+    window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    );
 
 
-        card.addEventListener("mousemove", event => {
+if (
+    prefersReducedMotion.matches
+) {
 
-            const rect =
-                card.getBoundingClientRect();
+    document.documentElement.classList.add(
+        "reduce-motion"
+    );
 
-            const x =
-                ((event.clientX - rect.left)
-                / rect.width - .5) * 8;
-
-            const y =
-                ((event.clientY - rect.top)
-                / rect.height - .5) * 8;
-
-
-            image.style.transform =
-                `scale(1.04) translate(${x}px, ${y}px)`;
-
-        });
-
-
-        card.addEventListener("mouseleave", () => {
-
-            image.style.transform =
-                "scale(1) translate(0,0)";
-
-        });
-
-    });
+}

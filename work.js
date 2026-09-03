@@ -1,23 +1,12 @@
 /* =========================================================
    XCY EVENTS
-   VISUAL ARCHIVE
+   CORPORATE GALLERY SYSTEM
 ========================================================= */
 
 
 /* =========================================================
    PHOTO DATABASE
-=========================================================
-
-   ADD YOUR PHOTOS HERE.
-
-   Every photo needs:
-
-   file     = filename inside pics/
-   title    = small title shown under/inside viewer
-   category = category it belongs to
-
 ========================================================= */
-
 
 const galleryData = [
 
@@ -29,36 +18,6 @@ const galleryData = [
         file: "wedding1.jpg",
         title: "Love wins.",
         category: "weddings"
-    },
-
-    {
-        file: "intro1.jpg",
-        title: "Love, simply.",
-        category: "introductions"
-    },
-
-    {
-        file: "intro2.jpg",
-        title: "One heart. Two souls.",
-        category: "introductions"
-    },
-
-    {
-        file: "photoshoot1.jpg",
-        title: "A little art. A lot of love.",
-        category: "photoshoots"
-    },
-
-    {
-        file: "port1.jpg",
-        title: "In Presence Of Love",
-        category: "portraits"
-    },
-
-    {
-        file: "port2.jpg",
-        title: "Smiles",
-        category: "portraits"
     },
 
     {
@@ -103,6 +62,56 @@ const galleryData = [
         category: "weddings"
     },
 
+
+    /* =====================================================
+       INTRODUCTIONS
+    ===================================================== */
+
+    {
+        file: "intro1.jpg",
+        title: "Love, simply.",
+        category: "introductions"
+    },
+
+    {
+        file: "intro2.jpg",
+        title: "One heart. Two souls.",
+        category: "introductions"
+    },
+
+
+    /* =====================================================
+       PHOTOSHOOTS
+    ===================================================== */
+
+    {
+        file: "photoshoot1.jpg",
+        title: "A little art. A lot of love.",
+        category: "photoshoots"
+    },
+
+
+    /* =====================================================
+       PORTRAITS
+    ===================================================== */
+
+    {
+        file: "port1.jpg",
+        title: "In Presence Of Love",
+        category: "portraits"
+    },
+
+    {
+        file: "port2.jpg",
+        title: "Smiles",
+        category: "portraits"
+    },
+
+
+    /* =====================================================
+       THE DUMP
+    ===================================================== */
+
     {
         file: "dump1.jpg",
         title: "Sisterhood Love",
@@ -114,15 +123,10 @@ const galleryData = [
 
 
 /* =========================================================
-   CATEGORY NAMES
+   CATEGORY DATABASE
 ========================================================= */
 
 const categories = [
-
-    {
-        id: "all",
-        label: "All"
-    },
 
     {
         id: "weddings",
@@ -159,85 +163,263 @@ const categories = [
 
 
 /* =========================================================
-   DOM ELEMENTS
+   SETTINGS
 ========================================================= */
 
-const gallery =
-    document.getElementById("gallery");
+const PHOTOS_PER_BATCH = 4;
 
-const categoryFilter =
-    document.getElementById("categoryFilter");
+const DEFAULT_GALLERY_COVER =
+    "images/xcylogo.png";
 
-const photoCount =
-    document.getElementById("photoCount");
-
-const loadMoreButton =
-    document.getElementById("loadMore");
 
 
 /* =========================================================
    STATE
 ========================================================= */
 
-let currentCategory = "all";
+const categoryState = {};
 
-let visibleLimit = 18;
+categories.forEach(category => {
 
-let filteredPhotos = [];
+    categoryState[category.id] =
+        PHOTOS_PER_BATCH;
+
+});
+
+
+let activeCategory = null;
+
+let lightboxPhotos = [];
 
 let lightboxIndex = 0;
+
+let selectedWedding = null;
 
 
 
 /* =========================================================
-   CATEGORY FILTER BUTTONS
+   DOM
 ========================================================= */
 
-function createCategoryButtons() {
-
-    categoryFilter.innerHTML = "";
-
-
-    categories.forEach(category => {
-
-        const button =
-            document.createElement("button");
+const categoryNavigation =
+    document.getElementById(
+        "categoryNavigation"
+    );
 
 
-        button.className =
-            "category-button";
+const categoryGalleries =
+    document.getElementById(
+        "categoryGalleries"
+    );
 
 
-        if (category.id === currentCategory) {
-
-            button.classList.add("active");
-
-        }
-
-
-        button.textContent =
-            category.label;
+const totalPhotoCount =
+    document.getElementById(
+        "totalPhotoCount"
+    );
 
 
-        button.dataset.category =
-            category.id;
+
+/* =========================================================
+   MENU
+========================================================= */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
 
 
-        button.addEventListener(
+const menuPanel =
+    document.getElementById(
+        "menuPanel"
+    );
+
+
+const closeMenu =
+    document.getElementById(
+        "closeMenu"
+    );
+
+
+function openMenu() {
+
+    if (!menuPanel) return;
+
+    menuPanel.classList.add("open");
+
+    document.body.classList.add(
+        "menu-open"
+    );
+
+    menuButton?.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+}
+
+
+function closeNavigation() {
+
+    if (!menuPanel) return;
+
+    menuPanel.classList.remove("open");
+
+    document.body.classList.remove(
+        "menu-open"
+    );
+
+    menuButton?.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+}
+
+
+menuButton?.addEventListener(
+    "click",
+    openMenu
+);
+
+
+closeMenu?.addEventListener(
+    "click",
+    closeNavigation
+);
+
+
+document
+    .querySelectorAll(
+        ".menu-panel nav a"
+    )
+    .forEach(link => {
+
+        link.addEventListener(
             "click",
-            () => {
+            closeNavigation
+        );
 
-                changeCategory(
-                    category.id
+    });
+
+
+
+/* =========================================================
+   TOTAL PHOTO COUNT
+========================================================= */
+
+function updateTotalCount() {
+
+    const total =
+        galleryData.length;
+
+    if (!totalPhotoCount) return;
+
+    totalPhotoCount.textContent =
+        `${total} PHOTOGRAPH${total === 1 ? "" : "S"}`;
+
+}
+
+
+
+/* =========================================================
+   CREATE CATEGORY NAVIGATION
+========================================================= */
+
+function createCategoryNavigation() {
+
+    if (!categoryNavigation) return;
+
+    categoryNavigation.innerHTML = "";
+
+
+    categories.forEach(
+        category => {
+
+            const button =
+                document.createElement(
+                    "button"
                 );
 
-            }
+
+            button.className =
+                "category-nav-button";
+
+
+            button.textContent =
+                category.label;
+
+
+            button.dataset.target =
+                category.id;
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    scrollToCategory(
+                        category.id
+                    );
+
+                }
+            );
+
+
+            categoryNavigation.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   SCROLL TO CATEGORY
+========================================================= */
+
+function scrollToCategory(
+    categoryId
+) {
+
+    const section =
+        document.getElementById(
+            `category-${categoryId}`
         );
 
 
-        categoryFilter.appendChild(
-            button
+    if (!section) return;
+
+
+    const navigation =
+        document.querySelector(
+            ".gallery-navigation"
         );
+
+
+    const offset =
+        navigation
+            ? navigation.offsetHeight + 25
+            : 100;
+
+
+    const top =
+        section.getBoundingClientRect().top
+        +
+        window.scrollY
+        -
+        offset;
+
+
+    window.scrollTo({
+
+        top,
+
+        behavior: "smooth"
 
     });
 
@@ -246,179 +428,255 @@ function createCategoryButtons() {
 
 
 /* =========================================================
-   CHANGE CATEGORY
+   RENDER ALL CATEGORY SECTIONS
 ========================================================= */
 
-function changeCategory(category) {
+function renderCategories() {
 
-    currentCategory = category;
+    if (!categoryGalleries) return;
 
-    visibleLimit = 18;
-
-    updateActiveCategory();
-
-    filterPhotos();
-
-    renderGallery();
-
-}
+    categoryGalleries.innerHTML = "";
 
 
+    categories.forEach(
+        (category, categoryIndex) => {
 
-/* =========================================================
-   UPDATE ACTIVE BUTTON
-========================================================= */
-
-function updateActiveCategory() {
-
-    document
-        .querySelectorAll(".category-button")
-        .forEach(button => {
-
-            button.classList.toggle(
-                "active",
-                button.dataset.category ===
-                currentCategory
-            );
-
-        });
-
-}
-
-
-
-/* =========================================================
-   FILTER PHOTOS
-========================================================= */
-
-function filterPhotos() {
-
-    if (currentCategory === "all") {
-
-        filteredPhotos =
-            [...galleryData];
-
-    } else {
-
-        filteredPhotos =
-            galleryData.filter(photo => {
-
-                return photo.category ===
-                    currentCategory;
-
-            });
-
-    }
-
-
-    updatePhotoCount();
-
-}
-
-
-
-/* =========================================================
-   PHOTO COUNT
-========================================================= */
-
-function updatePhotoCount() {
-
-    const count =
-        filteredPhotos.length;
-
-
-    photoCount.textContent =
-        `${count} PHOTOGRAPH${count === 1 ? "" : "S"}`;
-
-}
-
-
-
-/* =========================================================
-   CREATE GALLERY
-========================================================= */
-
-function renderGallery() {
-
-    gallery.innerHTML = "";
-
-
-    const photosToShow =
-        filteredPhotos.slice(
-            0,
-            visibleLimit
-        );
-
-
-    photosToShow.forEach(
-        (photo, index) => {
-
-            const item =
-                createGalleryItem(
-                    photo,
-                    index
+            const photos =
+                galleryData.filter(
+                    photo =>
+                        photo.category ===
+                        category.id
                 );
 
 
-            gallery.appendChild(item);
+            const section =
+                document.createElement(
+                    "section"
+                );
+
+
+            section.className =
+                "gallery-category reveal";
+
+
+            section.id =
+                `category-${category.id}`;
+
+
+            section.dataset.category =
+                category.id;
+
+
+            section.innerHTML = `
+
+                <div class="gallery-category-header">
+
+                    <div class="gallery-category-title">
+
+                        <small>
+                            ${String(categoryIndex + 1).padStart(2, "0")}
+                        </small>
+
+                        <h2>
+                            ${category.label}
+                        </h2>
+
+                    </div>
+
+                    <span class="gallery-category-count">
+                        ${photos.length}
+                        PHOTOGRAPH${photos.length === 1 ? "" : "S"}
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="category-grid"
+                    data-grid="${category.id}"
+                ></div>
+
+
+                <div class="category-actions">
+
+                    <button
+                        class="view-more"
+                        data-category="${category.id}"
+                    >
+
+                        <span>
+                            VIEW MORE
+                        </span>
+
+                        <b>+</b>
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            categoryGalleries.appendChild(
+                section
+            );
+
+
+            renderCategoryPhotos(
+                category.id
+            );
+
+
+            const viewMore =
+                section.querySelector(
+                    ".view-more"
+                );
+
+
+            viewMore?.addEventListener(
+                "click",
+                () => {
+
+                    showMorePhotos(
+                        category.id
+                    );
+
+                }
+            );
+
+
+            if (
+                photos.length <=
+                PHOTOS_PER_BATCH
+            ) {
+
+                viewMore?.classList.add(
+                    "hidden"
+                );
+
+            }
 
         }
     );
 
 
-    updateLoadMoreButton();
-
-
-    observeGalleryItems();
+    setupRevealObserver();
 
 }
 
 
 
 /* =========================================================
-   CREATE PHOTO ITEM
+   RENDER CATEGORY PHOTOS
 ========================================================= */
 
-function createGalleryItem(
+function renderCategoryPhotos(
+    categoryId
+) {
+
+    const grid =
+        document.querySelector(
+            `[data-grid="${categoryId}"]`
+        );
+
+
+    if (!grid) return;
+
+
+    const photos =
+        galleryData.filter(
+            photo =>
+                photo.category ===
+                categoryId
+        );
+
+
+    const limit =
+        categoryState[categoryId];
+
+
+    grid.innerHTML = "";
+
+
+    photos
+        .slice(0, limit)
+        .forEach(
+            (photo, index) => {
+
+                const card =
+                    createPhotoCard(
+                        photo,
+                        index,
+                        categoryId
+                    );
+
+
+                grid.appendChild(card);
+
+            }
+        );
+
+
+    const section =
+        document.getElementById(
+            `category-${categoryId}`
+        );
+
+
+    const button =
+        section?.querySelector(
+            ".view-more"
+        );
+
+
+    if (!button) return;
+
+
+    if (
+        limit >= photos.length
+    ) {
+
+        button.classList.add(
+            "hidden"
+        );
+
+    } else {
+
+        button.classList.remove(
+            "hidden"
+        );
+
+    }
+
+
+    setupRevealObserver();
+
+}
+
+
+
+/* =========================================================
+   CREATE PHOTO CARD
+========================================================= */
+
+function createPhotoCard(
     photo,
-    index
+    index,
+    categoryId
 ) {
 
     const article =
-        document.createElement("article");
+        document.createElement(
+            "article"
+        );
 
 
     article.className =
-        "gallery-item";
+        "gallery-card reveal";
 
 
-    /*
-        Create different editorial
-        layouts automatically.
-    */
-
-    const layouts = [
-
-        "layout-large",
-
-        "layout-small",
-
-        "layout-medium",
-
-        "layout-wide",
-
-        "layout-tall",
-
-        "layout-medium"
-
-    ];
-
-
-    const layout =
-        layouts[index % layouts.length];
-
-
-    article.classList.add(layout);
+    article.dataset.category =
+        categoryId;
 
 
     article.dataset.index =
@@ -427,20 +685,16 @@ function createGalleryItem(
 
     article.innerHTML = `
 
-        <div class="gallery-image">
+        <div class="gallery-card-image">
 
             <img
                 src="images/${photo.file}"
-                alt="${photo.title}"
+                alt="${escapeHTML(photo.title)}"
                 loading="lazy"
             >
 
-            <span class="gallery-number">
-                ${String(index + 1).padStart(2, "0")}
-            </span>
 
-
-            <div class="gallery-hover">
+            <div class="gallery-card-overlay">
 
                 <span>
                     VIEW IMAGE ↗
@@ -451,23 +705,25 @@ function createGalleryItem(
         </div>
 
 
-        <div class="gallery-info">
+        <div class="gallery-card-info">
 
-            <div class="gallery-info-left">
+            <div class="gallery-card-info-left">
 
-                <span class="gallery-category">
+                <span class="gallery-card-category">
                     ${formatCategory(photo.category)}
                 </span>
 
-                <h3 class="gallery-title">
-                    ${photo.title}
+                <h3 class="gallery-card-title">
+                    ${escapeHTML(photo.title)}
                 </h3>
 
             </div>
 
 
-            <span class="gallery-index">
+            <span class="gallery-card-number">
+
                 ${String(index + 1).padStart(2, "0")}
+
             </span>
 
         </div>
@@ -479,7 +735,10 @@ function createGalleryItem(
         "click",
         () => {
 
-            openLightbox(index);
+            openLightbox(
+                categoryId,
+                index
+            );
 
         }
     );
@@ -492,157 +751,112 @@ function createGalleryItem(
 
 
 /* =========================================================
-   CATEGORY FORMATTER
+   VIEW MORE
 ========================================================= */
 
-function formatCategory(category) {
+function showMorePhotos(
+    categoryId
+) {
+
+    categoryState[categoryId] +=
+        PHOTOS_PER_BATCH;
+
+
+    renderCategoryPhotos(
+        categoryId
+    );
+
+}
+
+
+
+/* =========================================================
+   FORMAT CATEGORY
+========================================================= */
+
+function formatCategory(
+    category
+) {
 
     const found =
         categories.find(
-            item => item.id === category
+            item =>
+                item.id === category
         );
 
 
-    if (!found) {
-
-        return category;
-
-    }
-
-
-    return found.label;
+    return found
+        ? found.label
+        : category;
 
 }
 
 
 
 /* =========================================================
-   LOAD MORE
+   ESCAPE HTML
 ========================================================= */
 
-function updateLoadMoreButton() {
+function escapeHTML(
+    value = ""
+) {
 
-    if (
-        visibleLimit >=
-        filteredPhotos.length
-    ) {
-
-        loadMoreButton.classList.add(
-            "hidden"
-        );
-
-    } else {
-
-        loadMoreButton.classList.remove(
-            "hidden"
-        );
-
-    }
-
-}
-
-
-loadMoreButton.addEventListener(
-    "click",
-    () => {
-
-        visibleLimit += 12;
-
-        renderGallery();
-
-    }
-);
-
-
-
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
-
-function observeGalleryItems() {
-
-    const items =
-        document.querySelectorAll(
-            ".gallery-item"
-        );
-
-
-    const observer =
-        new IntersectionObserver(
-
-            entries => {
-
-                entries.forEach(entry => {
-
-                    if (
-                        entry.isIntersecting
-                    ) {
-
-                        entry.target.classList.add(
-                            "visible"
-                        );
-
-                        observer.unobserve(
-                            entry.target
-                        );
-
-                    }
-
-                });
-
-            },
-
-            {
-                threshold: .08
-            }
-
-        );
-
-
-    items.forEach(item => {
-
-        observer.observe(item);
-
-    });
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
 }
 
 
 
 /* =========================================================
-   LIGHTBOX
+   LIGHTBOX ELEMENTS
 ========================================================= */
 
 const lightbox =
-    document.getElementById("lightbox");
+    document.getElementById(
+        "lightbox"
+    );
+
 
 const lightboxImage =
-    document.getElementById("lightboxImage");
+    document.getElementById(
+        "lightboxImage"
+    );
+
 
 const lightboxCategory =
     document.getElementById(
         "lightboxCategory"
     );
 
+
 const lightboxTitle =
     document.getElementById(
         "lightboxTitle"
     );
+
 
 const lightboxCounter =
     document.getElementById(
         "lightboxCounter"
     );
 
+
 const lightboxClose =
     document.getElementById(
         "lightboxClose"
     );
 
+
 const lightboxPrev =
     document.getElementById(
         "lightboxPrev"
     );
+
 
 const lightboxNext =
     document.getElementById(
@@ -655,9 +869,25 @@ const lightboxNext =
    OPEN LIGHTBOX
 ========================================================= */
 
-function openLightbox(index) {
+function openLightbox(
+    categoryId,
+    index
+) {
 
-    lightboxIndex = index;
+    if (!lightbox) return;
+
+
+    lightboxPhotos =
+        galleryData.filter(
+            photo =>
+                photo.category ===
+                categoryId
+        );
+
+
+    lightboxIndex =
+        index;
+
 
     updateLightbox();
 
@@ -674,7 +904,7 @@ function openLightbox(index) {
 
 
     document.body.classList.add(
-        "no-scroll"
+        "modal-open"
     );
 
 }
@@ -688,32 +918,50 @@ function openLightbox(index) {
 function updateLightbox() {
 
     const photo =
-        filteredPhotos[lightboxIndex];
+        lightboxPhotos[
+            lightboxIndex
+        ];
 
 
     if (!photo) return;
 
 
-    lightboxImage.src =
-        `images/${photo.file}`;
+    if (lightboxImage) {
+
+        lightboxImage.src =
+            `images/${photo.file}`;
 
 
-    lightboxImage.alt =
-        photo.title;
+        lightboxImage.alt =
+            photo.title;
+
+    }
 
 
-    lightboxCategory.textContent =
-        formatCategory(
-            photo.category
-        );
+    if (lightboxCategory) {
+
+        lightboxCategory.textContent =
+            formatCategory(
+                photo.category
+            );
+
+    }
 
 
-    lightboxTitle.textContent =
-        photo.title;
+    if (lightboxTitle) {
+
+        lightboxTitle.textContent =
+            photo.title;
+
+    }
 
 
-    lightboxCounter.textContent =
-        `${String(lightboxIndex + 1).padStart(2, "0")} / ${String(filteredPhotos.length).padStart(2, "0")}`;
+    if (lightboxCounter) {
+
+        lightboxCounter.textContent =
+            `${String(lightboxIndex + 1).padStart(2, "0")} / ${String(lightboxPhotos.length).padStart(2, "0")}`;
+
+    }
 
 }
 
@@ -724,6 +972,9 @@ function updateLightbox() {
 ========================================================= */
 
 function closeLightbox() {
+
+    if (!lightbox) return;
+
 
     lightbox.classList.remove(
         "open"
@@ -737,13 +988,13 @@ function closeLightbox() {
 
 
     document.body.classList.remove(
-        "no-scroll"
+        "modal-open"
     );
 
 }
 
 
-lightboxClose.addEventListener(
+lightboxClose?.addEventListener(
     "click",
     closeLightbox
 );
@@ -756,18 +1007,16 @@ lightboxClose.addEventListener(
 
 function nextImage() {
 
-    if (
-        lightboxIndex <
-        filteredPhotos.length - 1
-    ) {
+    if (!lightboxPhotos.length)
+        return;
 
-        lightboxIndex++;
 
-    } else {
-
-        lightboxIndex = 0;
-
-    }
+    lightboxIndex =
+        (
+            lightboxIndex + 1
+        )
+        %
+        lightboxPhotos.length;
 
 
     updateLightbox();
@@ -782,16 +1031,17 @@ function nextImage() {
 
 function previousImage() {
 
-    if (lightboxIndex > 0) {
+    if (!lightboxPhotos.length)
+        return;
 
-        lightboxIndex--;
 
-    } else {
-
-        lightboxIndex =
-            filteredPhotos.length - 1;
-
-    }
+    lightboxIndex =
+        (
+            lightboxIndex - 1 +
+            lightboxPhotos.length
+        )
+        %
+        lightboxPhotos.length;
 
 
     updateLightbox();
@@ -799,13 +1049,13 @@ function previousImage() {
 }
 
 
-lightboxNext.addEventListener(
+lightboxNext?.addEventListener(
     "click",
     nextImage
 );
 
 
-lightboxPrev.addEventListener(
+lightboxPrev?.addEventListener(
     "click",
     previousImage
 );
@@ -813,54 +1063,10 @@ lightboxPrev.addEventListener(
 
 
 /* =========================================================
-   KEYBOARD
+   LIGHTBOX BACKDROP
 ========================================================= */
 
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            !lightbox.classList.contains(
-                "open"
-            )
-        ) {
-
-            return;
-
-        }
-
-
-        if (event.key === "Escape") {
-
-            closeLightbox();
-
-        }
-
-
-        if (event.key === "ArrowRight") {
-
-            nextImage();
-
-        }
-
-
-        if (event.key === "ArrowLeft") {
-
-            previousImage();
-
-        }
-
-    }
-);
-
-
-
-/* =========================================================
-   CLICK BACKDROP TO CLOSE
-========================================================= */
-
-lightbox.addEventListener(
+lightbox?.addEventListener(
     "click",
     event => {
 
@@ -879,20 +1085,19 @@ lightbox.addEventListener(
 
 
 /* =========================================================
-   MOBILE SWIPE
+   TOUCH SWIPE
 ========================================================= */
 
 let touchStartX = 0;
 
-let touchEndX = 0;
 
-
-lightbox.addEventListener(
+lightbox?.addEventListener(
     "touchstart",
     event => {
 
         touchStartX =
-            event.changedTouches[0].screenX;
+            event.changedTouches[0]
+                .screenX;
 
     },
     {
@@ -901,19 +1106,23 @@ lightbox.addEventListener(
 );
 
 
-lightbox.addEventListener(
+lightbox?.addEventListener(
     "touchend",
     event => {
 
-        touchEndX =
-            event.changedTouches[0].screenX;
+        const touchEndX =
+            event.changedTouches[0]
+                .screenX;
 
 
         const distance =
-            touchEndX - touchStartX;
+            touchEndX -
+            touchStartX;
 
 
-        if (Math.abs(distance) < 50) {
+        if (
+            Math.abs(distance) < 50
+        ) {
 
             return;
 
@@ -939,79 +1148,1188 @@ lightbox.addEventListener(
 
 
 /* =========================================================
-   MENU
+   KEYBOARD
 ========================================================= */
 
-const menuButton =
-    document.getElementById(
-        "menuButton"
-    );
+document.addEventListener(
+    "keydown",
+    event => {
 
-const menuPanel =
-    document.getElementById(
-        "menuPanel"
-    );
+        if (
+            event.key === "Escape"
+        ) {
 
-const closeMenu =
-    document.getElementById(
-        "closeMenu"
-    );
+            closeLightbox();
+
+            closeAccessModal();
+
+            closeNavigation();
+
+        }
 
 
-menuButton.addEventListener(
-    "click",
-    () => {
+        if (
+            lightbox?.classList.contains(
+                "open"
+            )
+        ) {
 
-        menuPanel.classList.add(
-            "open"
-        );
+            if (
+                event.key ===
+                "ArrowRight"
+            ) {
 
-        document.body.classList.add(
-            "no-scroll"
-        );
+                nextImage();
+
+            }
+
+
+            if (
+                event.key ===
+                "ArrowLeft"
+            ) {
+
+                previousImage();
+
+            }
+
+        }
 
     }
 );
 
 
-closeMenu.addEventListener(
-    "click",
-    () => {
 
-        menuPanel.classList.remove(
-            "open"
+/* =========================================================
+   PRIVATE CLIENT DELIVERY
+=========================================================
+
+   IMPORTANT:
+
+   This section reads the galleries created
+   by admin.html from localStorage.
+
+   Public page NEVER displays:
+
+       - Google Drive URL
+       - client password
+
+   The Drive URL is only used after the
+   correct password is entered.
+
+========================================================= */
+
+
+/* =========================================================
+   PRIVATE GALLERY STORAGE
+========================================================= */
+
+const PRIVATE_GALLERY_STORAGE =
+    "xcy_galleries";
+
+
+const weddingDeliveries = [];
+
+
+
+/* =========================================================
+   DELIVERY GRID
+========================================================= */
+
+const deliveryGrid =
+    document.getElementById(
+        "deliveryGrid"
+    );
+
+
+
+/* =========================================================
+   LOAD PRIVATE GALLERIES
+========================================================= */
+
+function loadWeddingDeliveries() {
+
+    if (!deliveryGrid) return;
+
+
+    deliveryGrid.innerHTML = `
+
+        <div class="delivery-empty">
+
+            <span>
+                CLIENT GALLERIES
+            </span>
+
+            <p>
+                Loading private galleries...
+            </p>
+
+        </div>
+
+    `;
+
+
+    try {
+
+        const raw =
+            localStorage.getItem(
+                PRIVATE_GALLERY_STORAGE
+            );
+
+
+        const galleries =
+            raw
+                ? JSON.parse(raw)
+                : [];
+
+
+        weddingDeliveries.length =
+            0;
+
+
+        if (Array.isArray(galleries)) {
+
+            galleries.forEach(
+                gallery => {
+
+                    if (
+                        gallery &&
+                        gallery.id
+                    ) {
+
+                        weddingDeliveries.push(
+                            {
+                                id:
+                                    gallery.id,
+
+                                title:
+                                    gallery.title ||
+                                    "Private Gallery",
+
+                                eventType:
+                                    gallery.eventType ||
+                                    "other",
+
+                                clientName:
+                                    gallery.clientName ||
+                                    "",
+
+                                expiryDate:
+                                    gallery.expiryDate ||
+                                    "",
+
+                                createdDate:
+                                    gallery.createdDate ||
+                                    "",
+
+                                coverImage:
+                                    gallery.coverImage ||
+                                    DEFAULT_GALLERY_COVER,
+
+                                password:
+                                    gallery.password ||
+                                    "",
+
+                                driveUrl:
+                                    gallery.driveUrl ||
+                                    ""
+                            }
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        renderWeddingDeliveries();
+
+
+    } catch (error) {
+
+        console.error(
+            "Private gallery storage error:",
+            error
         );
 
-        document.body.classList.remove(
-            "no-scroll"
-        );
+
+        deliveryGrid.innerHTML = `
+
+            <div class="delivery-empty">
+
+                <span>
+                    CLIENT GALLERIES
+                </span>
+
+                <p>
+                    Private galleries are temporarily unavailable.
+                </p>
+
+            </div>
+
+        `;
 
     }
-);
+
+}
 
 
-document
-    .querySelectorAll(
-        ".menu-panel nav a"
-    )
-    .forEach(link => {
 
-        link.addEventListener(
-            "click",
-            () => {
+/* =========================================================
+   RENDER PRIVATE GALLERIES
+========================================================= */
 
-                menuPanel.classList.remove(
-                    "open"
-                );
+function renderWeddingDeliveries() {
 
-                document.body.classList.remove(
-                    "no-scroll"
-                );
+    if (!deliveryGrid) return;
+
+
+    deliveryGrid.innerHTML = "";
+
+
+    const now =
+        new Date();
+
+
+    const activeDeliveries =
+        weddingDeliveries.filter(
+            gallery => {
+
+                if (
+                    !gallery.expiryDate
+                ) {
+
+                    return true;
+
+                }
+
+
+                const expiry =
+                    new Date(
+                        `${gallery.expiryDate}T23:59:59`
+                    );
+
+
+                if (
+                    Number.isNaN(
+                        expiry.getTime()
+                    )
+                ) {
+
+                    return true;
+
+                }
+
+
+                return expiry > now;
 
             }
         );
 
-    });
+
+    if (
+        !activeDeliveries.length
+    ) {
+
+        deliveryGrid.innerHTML = `
+
+            <div class="delivery-empty">
+
+                <span>
+                    CLIENT GALLERIES
+                </span>
+
+                <p>
+                    Private client galleries will appear here
+                    when they are ready.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    activeDeliveries.forEach(
+        wedding => {
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "delivery-card reveal";
+
+
+            const eventType =
+                formatDeliveryEventType(
+                    wedding.eventType
+                );
+
+
+            const cover =
+                wedding.coverImage ||
+                DEFAULT_GALLERY_COVER;
+
+
+            card.innerHTML = `
+
+                <div
+                    class="delivery-cover"
+                    style="
+                        background:#111;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        overflow:hidden;
+                    "
+                >
+
+                    <img
+                        src="${escapeHTML(
+                            cover
+                        )}"
+                        alt="${escapeHTML(
+                            wedding.title ||
+                            "Private Client Gallery"
+                        )}"
+                        loading="lazy"
+                        style="
+                            width:100%;
+                            height:100%;
+                            object-fit:cover;
+                        "
+                        onerror="
+                            this.onerror=null;
+                            this.src='${DEFAULT_GALLERY_COVER}';
+                            this.style.objectFit='contain';
+                            this.style.padding='18%';
+                        "
+                    >
+
+                    <span class="delivery-status">
+                        PRIVATE GALLERY
+                    </span>
+
+                </div>
+
+
+                <div class="delivery-info">
+
+                    <div class="delivery-info-top">
+
+                        <div>
+
+                            <small>
+                                ${escapeHTML(
+                                    eventType
+                                ).toUpperCase()}
+                            </small>
+
+                            <h3>
+                                ${escapeHTML(
+                                    wedding.title ||
+                                    "Private Gallery"
+                                )}
+                            </h3>
+
+                        </div>
+
+
+                        <small>
+                            ${formatDeliveryDate(
+                                wedding.createdDate
+                            )}
+                        </small>
+
+                    </div>
+
+
+                    <button
+                        class="delivery-access"
+                        type="button"
+                        data-wedding-id="${escapeHTML(
+                            wedding.id
+                        )}"
+                    >
+
+                        <span>
+                            ACCESS GALLERY
+                        </span>
+
+                        <b>↗</b>
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            const accessButton =
+                card.querySelector(
+                    ".delivery-access"
+                );
+
+
+            accessButton?.addEventListener(
+                "click",
+                () => {
+
+                    openAccessModal(
+                        wedding
+                    );
+
+                }
+            );
+
+
+            deliveryGrid.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+    setupRevealObserver();
+
+}
+
+
+
+/* =========================================================
+   DELIVERY EVENT TYPE
+========================================================= */
+
+function formatDeliveryEventType(
+    type
+) {
+
+    const eventTypes = {
+
+        wedding:
+            "Wedding",
+
+        weddings:
+            "Wedding",
+
+        introduction:
+            "Introduction",
+
+        introductions:
+            "Introduction",
+
+        photoshoot:
+            "Photoshoot",
+
+        photoshoots:
+            "Photoshoot",
+
+        portrait:
+            "Portrait",
+
+        portraits:
+            "Portrait",
+
+        event:
+            "Event",
+
+        events:
+            "Event",
+
+        other:
+            "Private Event"
+
+    };
+
+
+    return (
+        eventTypes[type] ||
+        "Private Gallery"
+    );
+
+}
+
+
+
+/* =========================================================
+   DELIVERY DATE
+========================================================= */
+
+function formatDeliveryDate(
+    date
+) {
+
+    if (!date)
+        return "";
+
+
+    const parsed =
+        new Date(date);
+
+
+    if (
+        Number.isNaN(
+            parsed.getTime()
+        )
+    ) {
+
+        return "";
+
+    }
+
+
+    return parsed
+        .toLocaleDateString(
+            "en-GB",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }
+        )
+        .toUpperCase();
+
+}
+
+
+
+/* =========================================================
+   ACCESS MODAL
+========================================================= */
+
+const accessModal =
+    document.getElementById(
+        "accessModal"
+    );
+
+
+const accessClose =
+    document.getElementById(
+        "accessClose"
+    );
+
+
+const accessForm =
+    document.getElementById(
+        "accessForm"
+    );
+
+
+const accessPassword =
+    document.getElementById(
+        "accessPassword"
+    );
+
+
+const accessWeddingName =
+    document.getElementById(
+        "accessWeddingName"
+    );
+
+
+const accessMessage =
+    document.getElementById(
+        "accessMessage"
+    );
+
+
+const togglePassword =
+    document.getElementById(
+        "togglePassword"
+    );
+
+
+
+/* =========================================================
+   OPEN ACCESS
+========================================================= */
+
+function openAccessModal(
+    wedding
+) {
+
+    selectedWedding =
+        wedding;
+
+
+    if (accessWeddingName) {
+
+        accessWeddingName.textContent =
+            wedding.title ||
+            "Private Gallery";
+
+    }
+
+
+    if (accessPassword) {
+
+        accessPassword.value =
+            "";
+
+    }
+
+
+    if (accessMessage) {
+
+        accessMessage.textContent =
+            "";
+
+        accessMessage.classList.remove(
+            "error",
+            "success"
+        );
+
+    }
+
+
+    if (!accessModal) return;
+
+
+    accessModal.classList.add(
+        "open"
+    );
+
+
+    accessModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+
+    setTimeout(
+        () => {
+
+            accessPassword?.focus();
+
+        },
+        200
+    );
+
+}
+
+
+
+/* =========================================================
+   CLOSE ACCESS
+========================================================= */
+
+function closeAccessModal() {
+
+    if (!accessModal) return;
+
+
+    accessModal.classList.remove(
+        "open"
+    );
+
+
+    accessModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+    selectedWedding =
+        null;
+
+}
+
+
+accessClose?.addEventListener(
+    "click",
+    closeAccessModal
+);
+
+
+
+/* =========================================================
+   PASSWORD VISIBILITY
+========================================================= */
+
+togglePassword?.addEventListener(
+    "click",
+    () => {
+
+        if (!accessPassword)
+            return;
+
+
+        const visible =
+            accessPassword.type ===
+            "text";
+
+
+        accessPassword.type =
+            visible
+                ? "password"
+                : "text";
+
+
+        togglePassword.textContent =
+            visible
+                ? "SHOW"
+                : "HIDE";
+
+    }
+);
+
+
+
+/* =========================================================
+   ACCESS FORM
+========================================================= */
+
+accessForm?.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+
+        if (!selectedWedding)
+            return;
+
+
+        const password =
+            accessPassword?.value.trim() ||
+            "";
+
+
+        if (!password) {
+
+            if (accessMessage) {
+
+                accessMessage.textContent =
+                    "Please enter your access password.";
+
+                accessMessage.classList.remove(
+                    "success"
+                );
+
+                accessMessage.classList.add(
+                    "error"
+                );
+
+            }
+
+            return;
+
+        }
+
+
+        const storedGallery =
+            weddingDeliveries.find(
+                gallery =>
+                    gallery.id ===
+                    selectedWedding.id
+            );
+
+
+        if (!storedGallery) {
+
+            if (accessMessage) {
+
+                accessMessage.textContent =
+                    "This private gallery is no longer available.";
+
+                accessMessage.classList.add(
+                    "error"
+                );
+
+            }
+
+            return;
+
+        }
+
+
+        /* ================================================
+           EXPIRY CHECK
+        ================================================ */
+
+        if (
+            storedGallery.expiryDate
+        ) {
+
+            const expiry =
+                new Date(
+                    `${storedGallery.expiryDate}T23:59:59`
+                );
+
+
+            if (
+                !Number.isNaN(
+                    expiry.getTime()
+                ) &&
+                expiry < new Date()
+            ) {
+
+                if (accessMessage) {
+
+                    accessMessage.textContent =
+                        "This private gallery has expired.";
+
+                    accessMessage.classList.add(
+                        "error"
+                    );
+
+                }
+
+                return;
+
+            }
+
+        }
+
+
+        const submitButton =
+            accessForm.querySelector(
+                'button[type="submit"]'
+            );
+
+
+        const originalButtonText =
+            submitButton?.innerHTML;
+
+
+        if (submitButton) {
+
+            submitButton.disabled =
+                true;
+
+
+            submitButton.innerHTML =
+                `
+                    <span>
+                        VERIFYING...
+                    </span>
+
+                    <b>...</b>
+                `;
+
+        }
+
+
+        if (accessMessage) {
+
+            accessMessage.textContent =
+                "Verifying access...";
+
+            accessMessage.classList.remove(
+                "error",
+                "success"
+            );
+
+        }
+
+
+        /*
+         * Password comparison happens here.
+         *
+         * The Drive URL is never inserted
+         * into the public page markup.
+         */
+
+        const passwordMatches =
+            password ===
+            storedGallery.password;
+
+
+        if (!passwordMatches) {
+
+            if (accessMessage) {
+
+                accessMessage.textContent =
+                    "Incorrect access password.";
+
+                accessMessage.classList.remove(
+                    "success"
+                );
+
+                accessMessage.classList.add(
+                    "error"
+                );
+
+            }
+
+
+            accessPassword?.select();
+
+
+            if (submitButton) {
+
+                submitButton.disabled =
+                    false;
+
+                submitButton.innerHTML =
+                    originalButtonText ||
+                    "ACCESS GALLERY";
+
+            }
+
+
+            return;
+
+        }
+
+
+        if (
+            !storedGallery.driveUrl
+        ) {
+
+            if (accessMessage) {
+
+                accessMessage.textContent =
+                    "The private gallery link is unavailable.";
+
+                accessMessage.classList.add(
+                    "error"
+                );
+
+            }
+
+
+            if (submitButton) {
+
+                submitButton.disabled =
+                    false;
+
+                submitButton.innerHTML =
+                    originalButtonText ||
+                    "ACCESS GALLERY";
+
+            }
+
+
+            return;
+
+        }
+
+
+        if (accessMessage) {
+
+            accessMessage.textContent =
+                "Access granted. Opening your gallery...";
+
+            accessMessage.classList.remove(
+                "error"
+            );
+
+            accessMessage.classList.add(
+                "success"
+            );
+
+        }
+
+
+        setTimeout(
+            () => {
+
+                /*
+                 * The Drive URL is used only for
+                 * the final redirect.
+                 */
+
+                window.location.assign(
+                    storedGallery.driveUrl
+                );
+
+            },
+            500
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+let revealObserver;
+
+
+function setupRevealObserver() {
+
+    const elements =
+        document.querySelectorAll(
+            ".reveal:not(.reveal-observed)"
+        );
+
+
+    if (!elements.length)
+        return;
+
+
+    if (
+        !revealObserver
+    ) {
+
+        revealObserver =
+            new IntersectionObserver(
+
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target
+                                    .classList
+                                    .add(
+                                        "visible"
+                                    );
+
+
+                                entry.target
+                                    .classList
+                                    .add(
+                                        "reveal-observed"
+                                    );
+
+
+                                revealObserver
+                                    .unobserve(
+                                        entry.target
+                                    );
+
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+                    threshold: .1,
+
+                    rootMargin:
+                        "0px 0px -60px 0px"
+
+                }
+
+            );
+
+    }
+
+
+    elements.forEach(
+        (element, index) => {
+
+            element.style.transitionDelay =
+                `${Math.min(index % 4,3) * 70}ms`;
+
+
+            revealObserver.observe(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   NAVIGATION ACTIVE STATE
+========================================================= */
+
+const categorySections =
+    document.querySelectorAll(
+        ".gallery-category"
+    );
+
+
+const navigationButtons =
+    document.querySelectorAll(
+        ".category-nav-button"
+    );
+
+
+function setupCategoryObserver() {
+
+    if (
+        !categorySections.length
+    )
+        return;
+
+
+    const observer =
+        new IntersectionObserver(
+
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            const id =
+                                entry.target.dataset.category;
+
+
+                            navigationButtons
+                                .forEach(
+                                    button => {
+
+                                        button.classList.toggle(
+                                            "active",
+                                            button.dataset.target === id
+                                        );
+
+                                    }
+                                );
+
+                        }
+
+                    }
+                );
+
+            },
+
+            {
+                rootMargin:
+                    "-35% 0px -55% 0px",
+
+                threshold: 0
+
+            }
+
+        );
+
+
+    categorySections.forEach(
+        section =>
+            observer.observe(section)
+    );
+
+}
 
 
 
@@ -1019,8 +2337,61 @@ document
    INITIALIZE
 ========================================================= */
 
-createCategoryButtons();
+updateTotalCount();
 
-filterPhotos();
+createCategoryNavigation();
 
-renderGallery();
+renderCategories();
+
+loadWeddingDeliveries();
+
+setupCategoryObserver();
+
+
+
+/* =========================================================
+   ESCAPE KEY — GLOBAL
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeNavigation();
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   KEEP PRIVATE GALLERIES IN SYNC
+=========================================================
+
+   If admin.html is opened in another tab of the
+   same browser/origin and a gallery is created,
+   work.html will update automatically.
+
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    event => {
+
+        if (
+            event.key ===
+            PRIVATE_GALLERY_STORAGE
+        ) {
+
+            loadWeddingDeliveries();
+
+        }
+
+    }
+);

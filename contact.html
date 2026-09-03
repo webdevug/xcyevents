@@ -2,25 +2,43 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Contact — XCY EVENTS</title>
 
     <meta
         name="description"
-        content="Start a photography or film project with XCY EVENTS, a premium photography and videography company based in Kampala, Uganda."
+        content="Contact XCY EVENTS for premium photography, videography and visual storytelling in Kampala, Uganda and across East Africa."
     >
 
+    <!-- =====================================================
+         MASTER FONT — SAME AS INDEX
+    ====================================================== -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Manrope:wght@300;400;500;600&display=swap"
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="contact.css">
+    <link
+        rel="stylesheet"
+        href="contact.css"
+    >
+
 </head>
 
 
@@ -28,83 +46,155 @@
 
 
 <!-- =====================================================
-     NAVBAR
+     HEADER
 ===================================================== -->
 
-<header class="site-header">
+<header class="header">
 
-    <a href="index.html" class="logo">
-        XCY
+    <a
+        href="index.html"
+        class="brand"
+        aria-label="XCY EVENTS Home"
+    >
+
+        <img
+            src="images/xcylogo.png"
+            alt="XCY EVENTS"
+        >
+
     </a>
 
-    <div class="nav-center">
+
+    <div class="header-center">
         PHOTOGRAPHY / FILM
     </div>
 
-    <button class="menu-toggle" id="menuToggle">
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+    >
 
         <span>MENU</span>
 
-        <i></i>
-        <i></i>
+        <div class="menu-icon">
+
+            <i></i>
+            <i></i>
+
+        </div>
 
     </button>
 
 </header>
 
 
+
 <!-- =====================================================
      MENU
 ===================================================== -->
 
-<div class="menu-overlay" id="menuOverlay">
+<div
+    class="menu-panel"
+    id="menuPanel"
+    aria-hidden="true"
+>
 
-    <div class="menu-head">
-
-        <span>XCY EVENTS</span>
-
-        <button id="menuClose">
-            CLOSE
-        </button>
-
-    </div>
+    <div class="menu-panel-inner">
 
 
-    <nav class="fullscreen-nav">
+        <div class="menu-top">
 
-        <a href="index.html">
-            <small>01</small>
-            HOME
-        </a>
-
-        <a href="work.html">
-            <small>02</small>
-            WORK
-        </a>
-
-        <a href="services.html">
-            <small>03</small>
-            SERVICES
-        </a>
-
-        <a href="about.html">
-            <small>04</small>
-            ABOUT
-        </a>
-
-        <a href="contact.html">
-            <small>05</small>
-            CONTACT
-        </a>
-
-    </nav>
+            <span>
+                XCY EVENTS
+            </span>
 
 
-    <div class="menu-footer">
+            <button
+                class="menu-close"
+                id="menuClose"
+                type="button"
+            >
 
-        <span>KAMPALA · UGANDA</span>
+                CLOSE
 
-        <span>EAST AFRICA</span>
+                <strong>×</strong>
+
+            </button>
+
+        </div>
+
+
+
+        <nav class="menu-nav">
+
+            <span class="menu-nav-small">
+                NAVIGATION
+            </span>
+
+
+            <a href="index.html">
+
+                <small>01</small>
+
+                Home
+
+            </a>
+
+
+            <a href="work.html">
+
+                <small>02</small>
+
+                Gallery
+
+            </a>
+
+
+            <a href="services.html">
+
+                <small>03</small>
+
+                Services
+
+            </a>
+
+
+            <a href="about.html">
+
+                <small>04</small>
+
+                About
+
+            </a>
+
+
+            <a href="contact.html">
+
+                <small>05</small>
+
+                Contact
+
+            </a>
+
+        </nav>
+
+
+
+        <div class="menu-bottom">
+
+            <span>
+                KAMPALA · UGANDA
+            </span>
+
+            <span>
+                EAST AFRICA
+            </span>
+
+        </div>
 
     </div>
 
@@ -116,7 +206,7 @@
 
 
 <!-- =====================================================
-     CONTACT HERO
+     HERO
 ===================================================== -->
 
 <section class="contact-hero">
@@ -132,38 +222,51 @@
     </div>
 
 
-    <div class="hero-shade"></div>
+    <div class="hero-overlay"></div>
 
 
-    <div class="hero-topline">
+    <div class="hero-meta">
 
-        <span>05 / CONTACT</span>
+        <span class="hero-reveal" style="--hero-delay: 100ms;">
+            05 / CONTACT
+        </span>
 
-        <span>EST. UGANDA</span>
+
+        <span class="hero-reveal" style="--hero-delay: 180ms;">
+            KAMPALA · UGANDA
+        </span>
 
     </div>
 
 
     <div class="hero-content">
 
-        <span class="hero-kicker">
+        <span
+            class="eyebrow hero-reveal"
+            style="--hero-delay: 260ms;"
+        >
             LET'S CREATE SOMETHING
         </span>
 
 
-        <h1>
+        <h1 class="hero-reveal" style="--hero-delay: 360ms;">
 
             Your story.
             <br>
 
-            <em>Our lens.</em>
+            <span>Our lens.</span>
 
         </h1>
 
 
-        <p>
+        <p
+            class="hero-text hero-reveal"
+            style="--hero-delay: 460ms;"
+        >
 
             Tell us what you're planning.
+            <br>
+
             We'll take care of the rest.
 
         </p>
@@ -174,8 +277,9 @@
     <div class="hero-bottom">
 
         <span>
-            SCROLL TO BEGIN
+            SCROLL TO CONNECT
         </span>
+
 
         <span class="hero-arrow">
             ↓
@@ -194,19 +298,19 @@
 <section class="contact-introduction">
 
 
-    <div class="section-number">
+    <div class="intro-number">
         01
     </div>
 
 
-    <div class="intro-main">
+    <div class="intro-copy">
 
         <span class="eyebrow">
             THE FIRST CONVERSATION
         </span>
 
 
-        <h2>
+        <h2 class="scroll-reveal">
 
             Every great
             <br>
@@ -215,12 +319,12 @@
             <br>
 
             with a
-            <em>story.</em>
+            <span>story.</span>
 
         </h2>
 
 
-        <p>
+        <p class="scroll-reveal">
 
             Whether you're planning a wedding,
             an introduction, a portrait session,
@@ -234,369 +338,43 @@
 
     <div class="intro-side">
 
-        <span>01</span>
+        <div class="intro-line scroll-reveal">
 
-        <p>
-            Tell us where you're going.
-        </p>
-
-        <span>02</span>
-
-        <p>
-            Tell us what you're imagining.
-        </p>
-
-        <span>03</span>
-
-        <p>
-            We'll help bring it to life.
-        </p>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     PROJECT FORM
-===================================================== -->
-
-<section class="project-section">
-
-
-    <div class="project-header">
-
-        <div>
-
-            <span class="section-number">
-                02
-            </span>
-
-        </div>
-
-
-        <div>
-
-            <span class="eyebrow">
-                START A PROJECT
-            </span>
-
-            <h2>
-                Let's talk
-                <em>details.</em>
-            </h2>
-
-        </div>
-
-    </div>
-
-
-
-    <form class="project-form" id="projectForm">
-
-
-        <!-- NAME -->
-
-        <div class="form-row">
-
-            <div class="form-index">
+            <span>
                 01
-            </div>
+            </span>
 
-
-            <div class="form-body">
-
-                <label for="name">
-                    YOUR NAME
-                </label>
-
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="What should we call you?"
-                    required
-                >
-
-            </div>
+            <p>
+                Tell us where you're going.
+            </p>
 
         </div>
 
 
+        <div class="intro-line scroll-reveal">
 
-        <!-- CONTACT -->
-
-        <div class="form-row">
-
-            <div class="form-index">
+            <span>
                 02
-            </div>
+            </span>
 
-
-            <div class="form-body">
-
-                <label>
-                    YOUR CONTACT
-                </label>
-
-
-                <div class="split-input">
-
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Email address"
-                        required
-                    >
-
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="Phone / WhatsApp"
-                    >
-
-                </div>
-
-            </div>
+            <p>
+                Tell us what you're imagining.
+            </p>
 
         </div>
 
 
+        <div class="intro-line scroll-reveal">
 
-        <!-- SERVICE -->
-
-        <div class="form-row">
-
-            <div class="form-index">
+            <span>
                 03
-            </div>
+            </span>
 
-
-            <div class="form-body">
-
-                <label>
-                    WHAT DO YOU NEED?
-                </label>
-
-
-                <div class="service-grid">
-
-
-                    <label class="service-option">
-
-                        <input
-                            type="radio"
-                            name="service"
-                            value="Wedding"
-                            required
-                        >
-
-                        <span>Wedding</span>
-
-                    </label>
-
-
-                    <label class="service-option">
-
-                        <input
-                            type="radio"
-                            name="service"
-                            value="Introduction"
-                        >
-
-                        <span>Introduction</span>
-
-                    </label>
-
-
-                    <label class="service-option">
-
-                        <input
-                            type="radio"
-                            name="service"
-                            value="Portrait"
-                        >
-
-                        <span>Portrait</span>
-
-                    </label>
-
-
-                    <label class="service-option">
-
-                        <input
-                            type="radio"
-                            name="service"
-                            value="Commercial"
-                        >
-
-                        <span>Commercial</span>
-
-                    </label>
-
-
-                    <label class="service-option">
-
-                        <input
-                            type="radio"
-                            name="service"
-                            value="Videography"
-                        >
-
-                        <span>Film / Video</span>
-
-                    </label>
-
-
-                    <label class="service-option">
-
-                        <input
-                            type="radio"
-                            name="service"
-                            value="Other"
-                        >
-
-                        <span>Other</span>
-
-                    </label>
-
-                </div>
-
-            </div>
+            <p>
+                We'll help bring it to life.
+            </p>
 
         </div>
-
-
-
-        <!-- EVENT DETAILS -->
-
-        <div class="form-row">
-
-            <div class="form-index">
-                04
-            </div>
-
-
-            <div class="form-body">
-
-                <label>
-                    EVENT DETAILS
-                </label>
-
-
-                <div class="split-input">
-
-                    <input
-                        type="date"
-                        id="eventDate"
-                        name="eventDate"
-                    >
-
-                    <input
-                        type="text"
-                        id="eventLocation"
-                        name="eventLocation"
-                        placeholder="Event location"
-                    >
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- MESSAGE -->
-
-        <div class="form-row large-row">
-
-            <div class="form-index">
-                05
-            </div>
-
-
-            <div class="form-body">
-
-                <label for="message">
-                    TELL US ABOUT IT
-                </label>
-
-
-                <textarea
-                    id="message"
-                    name="message"
-                    placeholder="Tell us about your event, your idea or the feeling you're trying to create..."
-                    required
-                ></textarea>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- SEND -->
-
-        <div class="form-submit">
-
-            <div>
-
-                <span>
-                    XCY EVENTS
-                </span>
-
-                <small>
-                    We usually respond within 24 hours.
-                </small>
-
-            </div>
-
-
-            <button type="submit">
-
-                <span>SEND INQUIRY</span>
-
-                <strong>↗</strong>
-
-            </button>
-
-        </div>
-
-    </form>
-
-
-
-    <!-- SUCCESS -->
-
-    <div class="form-success" id="formSuccess">
-
-        <span>
-            INQUIRY RECEIVED
-        </span>
-
-        <h2>
-
-            Thank you.
-            <br>
-
-            Let's make
-            <br>
-
-            something
-            <em>beautiful.</em>
-
-        </h2>
-
-        <p>
-
-            We've received your project details.
-            The XCY team will be in touch shortly.
-
-        </p>
 
     </div>
 
@@ -608,29 +386,33 @@
      DIRECT CONTACT
 ===================================================== -->
 
-<section class="direct-contact">
+<section
+    class="direct-contact"
+    id="contact"
+>
 
 
     <div class="direct-heading">
 
-        <span class="section-number">
-            03
-        </span>
+
+        <div class="section-number">
+            02
+        </div>
 
 
         <div>
 
             <span class="eyebrow">
-                PREFER A DIRECT CONVERSATION?
+                CHOOSE YOUR WAY IN
             </span>
 
 
-            <h2>
+            <h2 class="scroll-reveal">
 
                 Reach us
                 <br>
 
-                <em>directly.</em>
+                <span>directly.</span>
 
             </h2>
 
@@ -643,28 +425,36 @@
     <div class="contact-list">
 
 
-        <!-- PHONE -->
+        <!-- =================================================
+             CALL
+        ================================================== -->
 
         <a
             href="tel:+256000000000"
-            class="contact-item"
+            class="contact-item scroll-reveal"
         >
 
-            <span class="contact-item-number">
+            <span class="contact-number">
                 01
             </span>
 
 
-            <div>
+            <div class="contact-main">
 
-                <span>
+                <span class="contact-label">
                     CALL
                 </span>
+
 
                 <h3>
                     +256 XXX XXX XXX
                 </h3>
 
+
+                <p>
+                    Speak directly with the XCY team.
+                </p>
+
             </div>
 
 
@@ -676,29 +466,38 @@
 
 
 
-        <!-- WHATSAPP -->
+        <!-- =================================================
+             WHATSAPP
+        ================================================== -->
 
         <a
             href="https://wa.me/256000000000"
             target="_blank"
-            class="contact-item"
+            rel="noopener"
+            class="contact-item scroll-reveal"
         >
 
-            <span class="contact-item-number">
+            <span class="contact-number">
                 02
             </span>
 
 
-            <div>
+            <div class="contact-main">
 
-                <span>
+                <span class="contact-label">
                     WHATSAPP
                 </span>
+
 
                 <h3>
                     START A CHAT
                 </h3>
 
+
+                <p>
+                    The quickest way to tell us about your project.
+                </p>
+
             </div>
 
 
@@ -710,27 +509,35 @@
 
 
 
-        <!-- EMAIL -->
+        <!-- =================================================
+             EMAIL
+        ================================================== -->
 
         <a
             href="mailto:hello@xcyevents.com"
-            class="contact-item"
+            class="contact-item scroll-reveal"
         >
 
-            <span class="contact-item-number">
+            <span class="contact-number">
                 03
             </span>
 
 
-            <div>
+            <div class="contact-main">
 
-                <span>
+                <span class="contact-label">
                     EMAIL
                 </span>
+
 
                 <h3>
                     HELLO@XCYEVENTS.COM
                 </h3>
+
+
+                <p>
+                    Send us the details of your project.
+                </p>
 
             </div>
 
@@ -748,22 +555,84 @@
 
 
 <!-- =====================================================
-     LOCATION
+     CONTACT NOTE
+===================================================== -->
+
+<section class="contact-note">
+
+
+    <div class="note-number">
+        03
+    </div>
+
+
+    <div class="note-content">
+
+        <span class="eyebrow">
+            BEFORE WE BEGIN
+        </span>
+
+
+        <h2 class="scroll-reveal">
+
+            Have an idea?
+            <br>
+
+            <span>Let's talk.</span>
+
+        </h2>
+
+
+        <p class="scroll-reveal">
+
+            You don't need to have everything figured out
+            before reaching out. Tell us what you have in
+            mind, where it is happening and what you want
+            the final story to feel like.
+
+        </p>
+
+
+        <p class="scroll-reveal">
+
+            We'll take it from there.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VISIT THE STUDIO
 ===================================================== -->
 
 <section class="location-section">
 
 
-    <div class="location-photo">
+    <!-- =================================================
+         GOOGLE MAP
+    ================================================== -->
 
-        <img
-            src="images/acessbuilding.png"
-            alt="XCY Events studio"
+    <div class="location-map image-scroll-reveal">
+
+        <iframe
+            src="https://www.google.com/maps?q=Access+Building+Rubaga+Road+Kampala+Uganda&output=embed"
             loading="lazy"
-        >
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            title="XCY Events location"
+        ></iframe>
 
     </div>
 
+
+
+    <!-- =================================================
+         LOCATION DETAILS
+    ================================================== -->
 
     <div class="location-details">
 
@@ -777,17 +646,17 @@
         </span>
 
 
-        <h2>
+        <h2 class="scroll-reveal">
 
             Come
             <br>
 
-            <em>see us.</em>
+            <span>see us.</span>
 
         </h2>
 
 
-        <p>
+        <p class="address scroll-reveal">
 
             Access Building
             <br>
@@ -806,12 +675,15 @@
         <a
             href="https://www.google.com/maps/search/?api=1&query=Access+Building+Rubaga+Road+Kampala+Uganda"
             target="_blank"
+            rel="noopener"
             class="map-button"
         >
 
             GET DIRECTIONS
 
-            <span>↗</span>
+            <span>
+                ↗
+            </span>
 
         </a>
 
@@ -833,7 +705,7 @@
     </span>
 
 
-    <h2>
+    <h2 class="scroll-reveal">
 
         Your moment
         <br>
@@ -841,18 +713,49 @@
         deserves
         <br>
 
-        <em>more.</em>
+        <span>more.</span>
 
     </h2>
 
 
-    <a href="#projectForm">
+    <p class="scroll-reveal">
+        Ready when you are.
+    </p>
 
-        START YOUR PROJECT
 
-        <span>↗</span>
+    <div class="final-actions">
 
-    </a>
+
+        <a
+            href="#contact"
+            class="scroll-reveal"
+        >
+
+            CONTACT XCY
+
+            <span>
+                ↗
+            </span>
+
+        </a>
+
+
+        <a
+            href="https://wa.me/256000000000"
+            target="_blank"
+            rel="noopener"
+            class="scroll-reveal"
+        >
+
+            WHATSAPP US
+
+            <span>
+                ↗
+            </span>
+
+        </a>
+
+    </div>
 
 </section>
 
@@ -868,20 +771,23 @@
 <footer class="site-footer">
 
 
-    <div class="footer-top">
+    <div class="footer-brand">
+
+        <img
+            src="images/xcylogo.png"
+            alt="XCY EVENTS"
+        >
 
 
-        <div class="footer-logo">
+        <p>
+            Photography / Film
+        </p>
 
-            <h2>
-                XCY
-            </h2>
+    </div>
 
-            <p>
-                Photography / Film
-            </p>
 
-        </div>
+
+    <div class="footer-columns">
 
 
         <div class="footer-column">
@@ -890,21 +796,26 @@
                 NAVIGATION
             </span>
 
+
             <a href="index.html">
                 Home
             </a>
 
+
             <a href="work.html">
-                Work
+                Gallery
             </a>
+
 
             <a href="services.html">
                 Services
             </a>
 
+
             <a href="about.html">
                 About
             </a>
+
 
             <a href="contact.html">
                 Contact
@@ -913,11 +824,13 @@
         </div>
 
 
+
         <div class="footer-column">
 
             <span>
                 STUDIO
             </span>
+
 
             <p>
 
@@ -937,11 +850,13 @@
         </div>
 
 
+
         <div class="footer-column">
 
             <span>
                 REGISTRATION
             </span>
+
 
             <p>
 
@@ -957,19 +872,22 @@
     </div>
 
 
+
     <div class="footer-bottom">
 
         <span>
             © 2026 XCY EVENTS
         </span>
 
+
         <span>
-            KAMPALA · EAST AFRICA
+            EAST AFRICA
         </span>
 
     </div>
 
 </footer>
+
 
 
 <script src="contact.js"></script>

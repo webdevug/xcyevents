@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>XCY — Private Control</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<!-- =========================================================
+     LOGIN
+========================================================= -->
+
+<section class="login-screen" id="loginScreen">
+
+    <div class="login-noise"></div>
+
+    <div class="login-card">
+
+        <div class="login-brand">
+            <img src="images/xcylogo.png" alt="XCY">
+        </div>
+
+        <div class="login-line"></div>
+
+        <span class="eyebrow">
+            PRIVATE CONTROL SYSTEM
+        </span>
+
+        <h1>
+            Welcome<br>
+            back.
+        </h1>
+
+        <p>
+            Secure access to bookings, client galleries
+            and production documents.
+        </p>
+
+        <form id="loginForm">
+
+            <div class="field">
+                <label for="adminPassword">
+                    ADMIN PASSWORD
+                </label>
+
+                <div class="password-field">
+                    <input
+                        type="password"
+                        id="adminPassword"
+                        placeholder="Enter password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        id="toggleLoginPassword"
+                    >
+                        SHOW
+                    </button>
+                </div>
+            </div>
+
+            <button class="primary-button login-button">
+                <span>ENTER CONTROL</span>
+                <span>↗</span>
+            </button>
+
+            <div
+                class="form-message"
+                id="loginMessage"
+            ></div>
+
+        </form>
+
+        <div class="login-footer">
+            <span>XCY EVENTS</span>
+            <span>PRIVATE / 2026</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     APPLICATION
+========================================================= -->
+
+<div class="app" id="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <a href="#" class="brand">
+                <img src="images/xcylogo.png" alt="XCY">
+            </a>
+
+            <span class="brand-caption">
+                PRIVATE CONTROL
+            </span>
+
+        </div>
+
+
+        <nav class="main-nav">
+
+            <button
+                class="nav-item active"
+                data-page="dashboard"
+            >
+                <span class="nav-number">01</span>
+                <span>Dashboard</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-page="bookings"
+            >
+                <span class="nav-number">02</span>
+                <span>Bookings</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-page="galleries"
+            >
+                <span class="nav-number">03</span>
+                <span>Client Galleries</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-page="documents"
+            >
+                <span class="nav-number">04</span>
+                <span>Documents</span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>System online</strong>
+                    <small>Local storage API</small>
+                </div>
+            </div>
+
+            <button
+                class="logout-button"
+                id="logoutButton"
+            >
+                <span>LOG OUT</span>
+                <span>↗</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MOBILE TOP -->
+
+    <header class="mobile-header">
+
+        <img src="images/xcylogo.png" alt="XCY">
+
+        <button id="mobileMenuButton">
+            MENU
+        </button>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <span class="topbar-label">
+                    XCY / CONTROL
+                </span>
+
+                <span
+                    class="topbar-date"
+                    id="currentDate"
+                ></span>
+            </div>
+
+            <button
+                class="new-booking-button"
+                id="newBookingButton"
+            >
+                <span>NEW BOOKING</span>
+                <strong>+</strong>
+            </button>
+
+        </header>
+
+
+        <!-- =====================================================
+             DASHBOARD
+        ====================================================== -->
+
+        <section
+            class="page active"
+            id="dashboardPage"
+        >
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        01 / OVERVIEW
+                    </span>
+
+                    <h1>
+                        Control<br>
+                        room.
+                    </h1>
+                </div>
+
+                <p>
+                    Everything happening across your bookings
+                    and private client deliveries.
+                </p>
+
+            </div>
+
+
+            <!-- STATS -->
+
+            <div class="stats-grid">
+
+                <article class="stat-card">
+
+                    <span class="stat-index">01</span>
+
+                    <span class="stat-label">
+                        TOTAL BOOKINGS
+                    </span>
+
+                    <strong id="statBookings">
+                        0
+                    </strong>
+
+                    <span class="stat-meta">
+                        All production records
+                    </span>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-index">02</span>
+
+                    <span class="stat-label">
+                        ACTIVE GALLERIES
+                    </span>
+
+                    <strong id="statGalleries">
+                        0
+                    </strong>
+
+                    <span class="stat-meta">
+                        Private client deliveries
+                    </span>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-index">03</span>
+
+                    <span class="stat-label">
+                        TOTAL DUE
+                    </span>
+
+                    <strong id="statDue">
+                        UGX 0
+                    </strong>
+
+                    <span class="stat-meta">
+                        Outstanding balance
+                    </span>
+
+                </article>
+
+
+                <article class="stat-card accent-stat">
+
+                    <span class="stat-index">04</span>
+
+                    <span class="stat-label">
+                        THIS MONTH
+                    </span>
+
+                    <strong id="statMonth">
+                        0
+                    </strong>
+
+                    <span class="stat-meta">
+                        Upcoming / current work
+                    </span>
+
+                </article>
+
+            </div>
+
+
+            <!-- DASHBOARD LOWER -->
+
+            <div class="dashboard-grid">
+
+                <section class="panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <span class="panel-kicker">
+                                RECENT ACTIVITY
+                            </span>
+
+                            <h2>
+                                Latest bookings
+                            </h2>
+                        </div>
+
+                        <button
+                            class="text-button"
+                            data-page-target="bookings"
+                        >
+                            VIEW ALL ↗
+                        </button>
+
+                    </div>
+
+                    <div
+                        class="booking-list"
+                        id="recentBookings"
+                    ></div>
+
+                </section>
+
+
+                <section class="panel quick-panel">
+
+                    <span class="panel-kicker">
+                        QUICK ACTION
+                    </span>
+
+                    <h2>
+                        Start something new.
+                    </h2>
+
+                    <p>
+                        Create a booking, generate a reference
+                        and optionally attach a private gallery.
+                    </p>
+
+                    <button
+                        class="primary-button"
+                        id="quickBookingButton"
+                    >
+                        CREATE BOOKING
+                        <span>↗</span>
+                    </button>
+
+                </section>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             BOOKINGS
+        ====================================================== -->
+
+        <section
+            class="page"
+            id="bookingsPage"
+        >
+
+            <div class="page-heading compact-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        02 / PRODUCTION
+                    </span>
+
+                    <h1>
+                        Bookings.
+                    </h1>
+                </div>
+
+                <p>
+                    Manage client information, event details
+                    and payment records.
+                </p>
+
+            </div>
+
+
+            <div class="toolbar">
+
+                <div class="search-box">
+                    <span>⌕</span>
+
+                    <input
+                        type="search"
+                        id="bookingSearch"
+                        placeholder="Search client, event or reference..."
+                    >
+                </div>
+
+                <button
+                    class="outline-button"
+                    id="bookingFilterButton"
+                >
+                    ALL BOOKINGS
+                </button>
+
+            </div>
+
+
+            <section class="table-panel">
+
+                <div class="table-head">
+
+                    <span>REFERENCE</span>
+                    <span>CLIENT / EVENT</span>
+                    <span>DATE</span>
+                    <span>PAYMENT</span>
+                    <span>STATUS</span>
+                    <span></span>
+
+                </div>
+
+                <div
+                    class="booking-table"
+                    id="bookingTable"
+                ></div>
+
+            </section>
+
+        </section>
+
+
+        <!-- =====================================================
+             GALLERIES
+        ====================================================== -->
+
+        <section
+            class="page"
+            id="galleriesPage"
+        >
+
+            <div class="page-heading compact-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        03 / DELIVERY
+                    </span>
+
+                    <h1>
+                        Private<br>
+                        galleries.
+                    </h1>
+                </div>
+
+                <p>
+                    Give each client a private password,
+                    delivery link and controlled access period.
+                </p>
+
+            </div>
+
+
+            <div class="gallery-admin-grid" id="adminGalleryGrid"></div>
+
+        </section>
+
+
+        <!-- =====================================================
+             DOCUMENTS
+        ====================================================== -->
+
+        <section
+            class="page"
+            id="documentsPage"
+        >
+
+            <div class="page-heading compact-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        04 / DOCUMENTS
+                    </span>
+
+                    <h1>
+                        Booking<br>
+                        slips.
+                    </h1>
+                </div>
+
+                <p>
+                    Preview and download your single-page
+                    production documents.
+                </p>
+
+            </div>
+
+
+            <section class="document-panel">
+
+                <div class="document-empty">
+
+                    <span class="document-symbol">
+                        PDF
+                    </span>
+
+                    <h2>
+                        Select a booking.
+                    </h2>
+
+                    <p>
+                        Choose any booking from the list to
+                        preview its booking slip here.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     BOOKING MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="bookingModal"
+    aria-hidden="true"
+>
+
+    <div class="modal-backdrop"></div>
+
+    <div class="modal-window">
+
+        <div class="modal-header">
+
+            <div>
+                <span class="eyebrow">
+                    BOOKING / NEW RECORD
+                </span>
+
+                <h2 id="bookingModalTitle">
+                    Create booking
+                </h2>
+            </div>
+
+            <button
+                class="close-modal"
+                data-close-modal
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="bookingForm">
+
+            <input
+                type="hidden"
+                id="editingBookingId"
+            >
+
+
+            <div class="form-section">
+
+                <div class="section-title">
+                    <span>01</span>
+                    CLIENT
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label for="clientName">
+                            CLIENT / PERSON BOOKING
+                        </label>
+
+                        <input
+                            id="clientName"
+                            required
+                            placeholder="e.g. Sarah Namukasa"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="clientPhone">
+                            PHONE
+                        </label>
+
+                        <input
+                            id="clientPhone"
+                            placeholder="+256..."
+                        >
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="section-title">
+                    <span>02</span>
+                    EVENT
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label for="eventName">
+                            EVENT NAME
+                        </label>
+
+                        <input
+                            id="eventName"
+                            required
+                            placeholder="e.g. Sarah & Brian Wedding"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="eventType">
+                            EVENT TYPE
+                        </label>
+
+                        <select id="eventType">
+
+                            <option value="wedding">
+                                Wedding
+                            </option>
+
+                            <option value="introduction">
+                                Introduction
+                            </option>
+
+                            <option value="photoshoot">
+                                Photoshoot
+                            </option>
+
+                            <option value="portrait">
+                                Portrait
+                            </option>
+
+                            <option value="event">
+                                Event
+                            </option>
+
+                            <option value="other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+                        <label for="eventDate">
+                            DATE
+                        </label>
+
+                        <input
+                            type="date"
+                            id="eventDate"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="field">
+                        <label for="eventTime">
+                            TIME
+                        </label>
+
+                        <input
+                            type="time"
+                            id="eventTime"
+                        >
+                    </div>
+
+
+                    <div class="field full">
+                        <label for="eventLocation">
+                            LOCATION
+                        </label>
+
+                        <input
+                            id="eventLocation"
+                            placeholder="Venue / Location"
+                        >
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="section-title">
+                    <span>03</span>
+                    PAYMENT
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label for="totalAmount">
+                            TOTAL AMOUNT / UGX
+                        </label>
+
+                        <input
+                            type="number"
+                            id="totalAmount"
+                            min="0"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="paidAmount">
+                            AMOUNT PAID / UGX
+                        </label>
+
+                        <input
+                            type="number"
+                            id="paidAmount"
+                            min="0"
+                            value="0"
+                        >
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-section gallery-section">
+
+                <div class="section-title">
+                    <span>04</span>
+                    PRIVATE GALLERY
+                </div>
+
+                <label class="switch-row">
+
+                    <span>
+                        <strong>Enable private client gallery</strong>
+                        <small>
+                            Creates a unique password-protected delivery.
+                        </small>
+                    </span>
+
+                    <input
+                        type="checkbox"
+                        id="enableGallery"
+                    >
+
+                    <span class="fake-switch"></span>
+
+                </label>
+
+
+                <div
+                    class="gallery-fields"
+                    id="galleryFields"
+                >
+
+                    <div class="form-grid">
+
+                        <div class="field full">
+                            <label for="galleryTitle">
+                                GALLERY NAME
+                            </label>
+
+                            <input
+                                id="galleryTitle"
+                                placeholder="e.g. Sarah & Brian — Wedding Gallery"
+                            >
+                        </div>
+
+
+                        <div class="field full">
+                            <label for="driveUrl">
+                                GOOGLE DRIVE FOLDER LINK
+                            </label>
+
+                            <input
+                                type="url"
+                                id="driveUrl"
+                                placeholder="https://drive.google.com/..."
+                            >
+                        </div>
+
+
+                        <div class="field">
+                            <label for="coverImage">
+                                EXISTING COVER IMAGE
+                            </label>
+
+                            <input
+                                id="coverImage"
+                                placeholder="images/wedding1.jpg"
+                            >
+
+                            <small class="field-help">
+                                Existing site image only. No uploads.
+                            </small>
+                        </div>
+
+
+                        <div class="field">
+                            <label for="expiryDate">
+                                EXPIRY DATE
+                            </label>
+
+                            <input
+                                type="date"
+                                id="expiryDate"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="password-generator">
+
+                        <div>
+
+                            <span class="password-label">
+                                CLIENT PASSWORD
+                            </span>
+
+                            <strong id="generatedPassword">
+                                —
+                            </strong>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="outline-button"
+                            id="generatePasswordButton"
+                        >
+                            GENERATE
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="form-message"
+                id="bookingFormMessage"
+            ></div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="outline-button"
+                    data-close-modal
+                >
+                    CANCEL
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    SAVE BOOKING
+                    <span>↗</span>
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     PDF PREVIEW MODAL
+========================================================= -->
+
+<div
+    class="modal pdf-modal"
+    id="pdfModal"
+    aria-hidden="true"
+>
+
+    <div class="modal-backdrop"></div>
+
+    <div class="pdf-window">
+
+        <div class="pdf-header">
+
+            <div>
+                <span class="eyebrow">
+                    DOCUMENT PREVIEW
+                </span>
+
+                <h2>
+                    Booking slip
+                </h2>
+            </div>
+
+            <div class="pdf-actions">
+
+                <button
+                    class="outline-button"
+                    id="downloadPdfButton"
+                >
+                    DOWNLOAD PDF
+                </button>
+
+                <button
+                    class="close-modal"
+                    data-close-modal
+                >
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+        <iframe
+            id="pdfFrame"
+            title="Booking PDF Preview"
+        ></iframe>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script src="admin.js"></script>
+
+</body>
+</html>

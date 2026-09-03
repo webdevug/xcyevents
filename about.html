@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -17,26 +16,16 @@
         content="Discover the story behind XCY EVENTS, a premium photography and videography company based in Kampala, Uganda and serving East Africa."
     >
 
-    <!-- GOOGLE FONTS -->
-
+    <!-- INTER — MASTER XCY FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Manrope:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
-    <link
-        rel="stylesheet"
-        href="about.css"
-    >
-
+    <link rel="stylesheet" href="about.css">
 </head>
 
 
@@ -45,37 +34,38 @@
 
 <!-- =====================================================
      HEADER
-====================================================== -->
+===================================================== -->
 
 <header class="header">
 
-    <a
-        href="index.html"
-        class="brand"
-    >
-        XCY
+    <a href="index.html" class="brand">
+
+        <img
+            src="images/xcylogo.png"
+            alt="XCY EVENTS"
+        >
+
     </a>
 
 
     <div class="header-center">
-
         PHOTOGRAPHY / FILM
-
     </div>
 
 
     <button
         class="menu-button"
         id="menuButton"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
     >
 
         <span>MENU</span>
 
         <div class="menu-icon">
-
             <i></i>
             <i></i>
-
         </div>
 
     </button>
@@ -86,93 +76,69 @@
 
 <!-- =====================================================
      MENU
-====================================================== -->
+===================================================== -->
 
 <div
     class="menu-panel"
     id="menuPanel"
+    aria-hidden="true"
 >
 
-    <div class="menu-inner">
-
+    <div class="menu-panel-inner">
 
         <div class="menu-top">
 
-            <span>
-                XCY EVENTS
-            </span>
+            <span>XCY EVENTS</span>
 
-
-            <button id="closeMenu">
-
-                CLOSE ×
-
+            <button
+                id="closeMenu"
+                type="button"
+            >
+                CLOSE <strong>×</strong>
             </button>
 
         </div>
 
 
-
         <nav>
 
+            <span class="menu-nav-label">
+                NAVIGATION
+            </span>
+
             <a href="index.html">
-
                 <small>01</small>
-
                 Home
-
             </a>
-
 
             <a href="work.html">
-
                 <small>02</small>
-
-                Archive
-
+                Gallery
             </a>
-
 
             <a href="services.html">
-
                 <small>03</small>
-
                 Services
-
             </a>
-
 
             <a href="about.html">
-
                 <small>04</small>
-
                 About
-
             </a>
 
-
             <a href="contact.html">
-
                 <small>05</small>
-
                 Contact
-
             </a>
 
         </nav>
 
 
-
         <div class="menu-bottom">
 
-            <span>
-                KAMPALA · UGANDA
-            </span>
+            <span>KAMPALA · UGANDA</span>
 
-
-            <span>
-                EAST AFRICA
-            </span>
+            <span>EAST AFRICA</span>
 
         </div>
 
@@ -187,66 +153,64 @@
 
 <!-- =====================================================
      HERO
-====================================================== -->
+===================================================== -->
 
 <section class="about-hero">
 
-
-    <div class="hero-index">
-
+    <div class="hero-index hero-reveal" style="--hero-delay:100ms">
         XCY / 04
-
     </div>
 
-
-
-    <div class="hero-location">
-
+    <div class="hero-location hero-reveal" style="--hero-delay:180ms">
         KAMPALA · UGANDA
-
     </div>
 
 
+    <div class="hero-logo-wrap">
 
-    <div class="hero-title">
-
-        <span>
+        <span
+            class="hero-kicker hero-reveal"
+            style="--hero-delay:260ms"
+        >
             THIS IS
         </span>
 
 
-        <h1>
+        <div
+            class="hero-logo hero-reveal"
+            style="--hero-delay:380ms"
+        >
 
-            XCY
+            <img
+                src="images/xcylogo.png"
+                alt="XCY EVENTS"
+            >
 
-        </h1>
+        </div>
 
 
-        <span>
+        <span
+            class="hero-kicker hero-reveal"
+            style="--hero-delay:500ms"
+        >
             EVENTS
-
         </span>
 
     </div>
 
 
-
-    <div class="hero-caption">
+    <div
+        class="hero-caption hero-reveal"
+        style="--hero-delay:620ms"
+    >
 
         <p>
-
-            Photography.
-            <br>
-
-            Film.
-            <br>
-
+            Photography.<br>
+            Film.<br>
             Visual storytelling.
-
         </p>
 
     </div>
-
 
 </section>
 
@@ -254,56 +218,45 @@
 
 <!-- =====================================================
      STATEMENT
-====================================================== -->
+===================================================== -->
 
 <section class="statement">
 
-
-    <div class="statement-label">
-
+    <div class="statement-label scroll-reveal">
         01 / THE STUDIO
-
     </div>
 
 
     <div class="statement-content">
 
-        <p class="statement-lead">
-
+        <p class="statement-lead scroll-reveal">
             We believe great photography
             is not simply about seeing
             what is in front of you.
-
         </p>
 
 
-        <p>
-
+        <p class="scroll-reveal">
             It is about understanding the
             moment, anticipating the emotion
             and knowing exactly when to press
             the shutter.
-
         </p>
 
 
-        <p>
-
+        <p class="scroll-reveal">
             XCY EVENTS is a photography and
             videography company based in
             Kampala, Uganda, creating visual
             stories across East Africa.
-
         </p>
 
 
-        <p>
-
+        <p class="scroll-reveal">
             Our work is built around people,
             atmosphere, culture and the
             moments that make an occasion
             unforgettable.
-
         </p>
 
     </div>
@@ -314,12 +267,11 @@
 
 <!-- =====================================================
      FOUNDER
-====================================================== -->
+===================================================== -->
 
 <section class="founder">
 
-
-    <div class="founder-image">
+    <div class="founder-image image-scroll-reveal">
 
         <img
             src="images/galukande.jpg"
@@ -327,10 +279,10 @@
             loading="lazy"
         >
 
-
         <div class="image-caption">
 
             CHRISTOPHER GALUKANDE
+
             <span>
                 FOUNDER / C.E.O
             </span>
@@ -340,71 +292,57 @@
     </div>
 
 
-
     <div class="founder-copy">
 
-
-        <span class="section-label">
-
+        <span class="section-label scroll-reveal">
             02 / THE FOUNDER
-
         </span>
 
 
-        <h2>
-
+        <h2 class="scroll-reveal">
             Led by
             <br>
-
             <em>vision.</em>
-
         </h2>
 
 
-        <p class="founder-intro">
-
+        <p class="founder-intro scroll-reveal">
             At the heart of XCY EVENTS is
             its founder, Mr Galukande
             Christopher.
-
         </p>
 
 
-        <p>
-
+        <p class="scroll-reveal">
             Christopher's approach to visual
             storytelling has shaped XCY into
             a company focused on more than
             simply documenting events.
-
         </p>
 
 
-        <p>
-
+        <p class="scroll-reveal">
             Every frame is approached with
             intention — from composition and
             lighting to timing, emotion and
             the atmosphere surrounding a
             moment.
-
         </p>
 
 
-        <p>
-
+        <p class="scroll-reveal">
             Together with a team of skilled
             creatives, photographers and
             filmmakers, he continues to build
             visual experiences for clients
             across Uganda and East Africa.
-
         </p>
 
 
-        <div class="founder-signature">
+        <div class="founder-signature scroll-reveal">
 
             GALUKANDE
+
             <span>
                 CHRISTOPHER
             </span>
@@ -417,27 +355,15 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- =====================================================
-     THE TEAM
-====================================================== -->
+     TEAM
+===================================================== -->
 
 <section class="team">
 
     <div class="team-heading">
 
-        <div class="team-heading-top">
+        <div class="team-heading-top scroll-reveal">
 
             <span>
                 03 / THE COLLECTIVE
@@ -449,18 +375,24 @@
 
         </div>
 
-        <h2>
+
+        <h2 class="scroll-reveal">
+
             The people
             <br>
             behind the
             <br>
             <em>frame.</em>
+
         </h2>
 
-        <p>
+
+        <p class="scroll-reveal">
+
             A collective of photographers, filmmakers,
             creatives and visual storytellers united by
             one purpose — creating work that lasts.
+
         </p>
 
     </div>
@@ -469,11 +401,9 @@
     <div class="team-grid">
 
 
-        <!-- MEMBER 01 -->
+        <article class="team-member scroll-reveal">
 
-        <article class="team-member">
-
-            <div class="team-photo">
+            <div class="team-photo image-scroll-reveal">
 
                 <img
                     src="images/person.png"
@@ -502,12 +432,9 @@
         </article>
 
 
+        <article class="team-member scroll-reveal">
 
-        <!-- MEMBER 02 -->
-
-        <article class="team-member">
-
-            <div class="team-photo">
+            <div class="team-photo image-scroll-reveal">
 
                 <img
                     src="images/person.png"
@@ -536,12 +463,9 @@
         </article>
 
 
+        <article class="team-member scroll-reveal">
 
-        <!-- MEMBER 03 -->
-
-        <article class="team-member">
-
-            <div class="team-photo">
+            <div class="team-photo image-scroll-reveal">
 
                 <img
                     src="images/person.png"
@@ -570,12 +494,9 @@
         </article>
 
 
+        <article class="team-member scroll-reveal">
 
-        <!-- MEMBER 04 -->
-
-        <article class="team-member">
-
-            <div class="team-photo">
+            <div class="team-photo image-scroll-reveal">
 
                 <img
                     src="images/person.png"
@@ -604,12 +525,9 @@
         </article>
 
 
+        <article class="team-member scroll-reveal">
 
-        <!-- MEMBER 05 -->
-
-        <article class="team-member">
-
-            <div class="team-photo">
+            <div class="team-photo image-scroll-reveal">
 
                 <img
                     src="images/person.png"
@@ -638,12 +556,9 @@
         </article>
 
 
+        <article class="team-member scroll-reveal">
 
-        <!-- MEMBER 06 -->
-
-        <article class="team-member">
-
-            <div class="team-photo">
+            <div class="team-photo image-scroll-reveal">
 
                 <img
                     src="images/person.png"
@@ -672,12 +587,9 @@
         </article>
 
 
+        <article class="team-member scroll-reveal">
 
-        <!-- MEMBER 07 -->
-
-        <article class="team-member">
-
-            <div class="team-photo">
+            <div class="team-photo image-scroll-reveal">
 
                 <img
                     src="images/person.png"
@@ -706,12 +618,9 @@
         </article>
 
 
+        <article class="team-member scroll-reveal">
 
-        <!-- MEMBER 08 -->
-
-        <article class="team-member">
-
-            <div class="team-photo">
+            <div class="team-photo image-scroll-reveal">
 
                 <img
                     src="images/person.png"
@@ -740,10 +649,7 @@
         </article>
 
 
-
-        <!-- RECRUITMENT CARD -->
-
-        <article class="team-member team-recruit">
+        <article class="team-member team-recruit scroll-reveal">
 
             <div class="recruit-inner">
 
@@ -788,30 +694,17 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 <!-- =====================================================
      PHILOSOPHY
-====================================================== -->
+===================================================== -->
 
 <section class="philosophy">
 
-
-    <div class="philosophy-top">
+    <div class="philosophy-top scroll-reveal">
 
         <span>
             03 / OUR PHILOSOPHY
         </span>
-
 
         <span>
             THE XCY APPROACH
@@ -820,10 +713,9 @@
     </div>
 
 
-
     <div class="philosophy-title">
 
-        <h2>
+        <h2 class="scroll-reveal">
 
             SEE.
             <br>
@@ -838,100 +730,63 @@
     </div>
 
 
-
     <div class="philosophy-grid">
 
+        <div class="philosophy-item scroll-reveal">
 
-        <div class="philosophy-item">
+            <span>01</span>
 
-            <span>
-                01
-            </span>
-
-
-            <h3>
-                OBSERVE
-            </h3>
-
+            <h3>OBSERVE</h3>
 
             <p>
-
                 We pay attention to the details
                 others might miss — expressions,
                 movement, light and atmosphere.
-
             </p>
 
         </div>
 
 
+        <div class="philosophy-item scroll-reveal">
 
-        <div class="philosophy-item">
+            <span>02</span>
 
-            <span>
-                02
-            </span>
-
-
-            <h3>
-                CONNECT
-            </h3>
-
+            <h3>CONNECT</h3>
 
             <p>
-
                 People are at the centre of
                 our work. We create an environment
                 where genuine moments happen.
-
             </p>
 
         </div>
 
 
+        <div class="philosophy-item scroll-reveal">
 
-        <div class="philosophy-item">
+            <span>03</span>
 
-            <span>
-                03
-            </span>
-
-
-            <h3>
-                CREATE
-            </h3>
-
+            <h3>CREATE</h3>
 
             <p>
-
                 Technology gives us the tools.
                 Experience gives us the judgement
                 to turn those tools into imagery.
-
             </p>
 
         </div>
 
 
+        <div class="philosophy-item scroll-reveal">
 
-        <div class="philosophy-item">
+            <span>04</span>
 
-            <span>
-                04
-            </span>
-
-
-            <h3>
-                PRESERVE
-            </h3>
-
+            <h3>PRESERVE</h3>
 
             <p>
-
                 Our final responsibility is to
                 create something that still feels
                 powerful years from now.
-
             </p>
 
         </div>
@@ -944,19 +799,17 @@
 
 <!-- =====================================================
      EXPERTISE
-====================================================== -->
+===================================================== -->
 
 <section class="expertise">
 
-
     <div class="expertise-header">
 
-        <span>
+        <span class="scroll-reveal">
             04 / EXPERTISE
         </span>
 
-
-        <h2>
+        <h2 class="scroll-reveal">
 
             Built for
             <br>
@@ -968,112 +821,66 @@
     </div>
 
 
-
     <div class="expertise-content">
 
-
-        <p class="expertise-lead">
-
+        <p class="expertise-lead scroll-reveal">
             Experience meets technology.
-
         </p>
 
 
-        <p>
-
+        <p class="scroll-reveal">
             From professional photography systems
             and lighting equipment to modern
             filmmaking tools and professional
             post-production workflows, XCY is
             equipped to handle productions of
             different scales.
-
         </p>
 
 
-        <p>
-
+        <p class="scroll-reveal">
             But equipment alone doesn't create
             great work.
-
         </p>
 
 
-        <p>
-
+        <p class="scroll-reveal">
             Our greatest asset is the knowledge,
             experience and creative judgement
             of the people operating it.
-
         </p>
-
 
 
         <div class="expertise-list">
 
-            <div>
-
+            <div class="scroll-reveal">
                 <span>01</span>
-
-                <p>
-                    PROFESSIONAL PHOTOGRAPHY
-                </p>
-
+                <p>PROFESSIONAL PHOTOGRAPHY</p>
             </div>
 
-
-            <div>
-
+            <div class="scroll-reveal">
                 <span>02</span>
-
-                <p>
-                    CINEMATIC VIDEOGRAPHY
-                </p>
-
+                <p>CINEMATIC VIDEOGRAPHY</p>
             </div>
 
-
-            <div>
-
+            <div class="scroll-reveal">
                 <span>03</span>
-
-                <p>
-                    PROFESSIONAL LIGHTING
-                </p>
-
+                <p>PROFESSIONAL LIGHTING</p>
             </div>
 
-
-            <div>
-
+            <div class="scroll-reveal">
                 <span>04</span>
-
-                <p>
-                    CREATIVE DIRECTION
-                </p>
-
+                <p>CREATIVE DIRECTION</p>
             </div>
 
-
-            <div>
-
+            <div class="scroll-reveal">
                 <span>05</span>
-
-                <p>
-                    POST PRODUCTION
-                </p>
-
+                <p>POST PRODUCTION</p>
             </div>
 
-
-            <div>
-
+            <div class="scroll-reveal">
                 <span>06</span>
-
-                <p>
-                    VISUAL STORYTELLING
-                </p>
-
+                <p>VISUAL STORYTELLING</p>
             </div>
 
         </div>
@@ -1085,11 +892,10 @@
 
 
 <!-- =====================================================
-     EAST AFRICA
-====================================================== -->
+     WHERE WE WORK — FULL SCREEN IMAGE
+===================================================== -->
 
 <section class="east-africa">
-
 
     <div class="africa-image">
 
@@ -1102,20 +908,19 @@
     </div>
 
 
+    <div class="africa-overlay"></div>
+
 
     <div class="africa-copy">
 
-
-        <span class="section-label">
-
+        <span class="section-label scroll-reveal">
             05 / WHERE WE WORK
-
         </span>
 
 
-        <h2>
+        <h2 class="scroll-reveal">
 
-            Born in
+            Made in
             <br>
 
             <em>Uganda.</em>
@@ -1123,7 +928,7 @@
         </h2>
 
 
-        <p>
+        <p class="scroll-reveal">
 
             Based in Kampala and connected
             to the wider creative landscape
@@ -1132,7 +937,7 @@
         </p>
 
 
-        <p>
+        <p class="scroll-reveal">
 
             XCY EVENTS works with individuals,
             families, businesses, organisations
@@ -1142,19 +947,11 @@
         </p>
 
 
-        <div class="africa-countries">
+        <div class="africa-countries scroll-reveal">
 
-            <span>
-                UGANDA
-            </span>
-
-            <span>
-                EAST AFRICA
-            </span>
-
-            <span>
-                DESTINATION
-            </span>
+            <span>UGANDA</span>
+            <span>EAST AFRICA</span>
+            <span>DESTINATION</span>
 
         </div>
 
@@ -1166,19 +963,18 @@
 
 <!-- =====================================================
      CREDENTIALS
-====================================================== -->
+===================================================== -->
 
 <section class="credentials">
 
-
     <div class="credential-heading">
 
-        <span>
+        <span class="scroll-reveal">
             06 / CREDENTIALS
         </span>
 
 
-        <h2>
+        <h2 class="scroll-reveal">
 
             Established
             <br>
@@ -1190,85 +986,36 @@
     </div>
 
 
-
     <div class="credential-list">
 
-
-        <div class="credential-row">
-
-            <span>
-                COMPANY
-            </span>
-
-            <strong>
-                XCY EVENTS
-            </strong>
-
+        <div class="credential-row scroll-reveal">
+            <span>COMPANY</span>
+            <strong>XCY EVENTS</strong>
         </div>
 
-
-        <div class="credential-row">
-
-            <span>
-                INDUSTRY
-            </span>
-
-            <strong>
-                PHOTOGRAPHY & VIDEOGRAPHY
-            </strong>
-
+        <div class="credential-row scroll-reveal">
+            <span>INDUSTRY</span>
+            <strong>PHOTOGRAPHY &amp; VIDEOGRAPHY</strong>
         </div>
 
-
-        <div class="credential-row">
-
-            <span>
-                LOCATION
-            </span>
-
-            <strong>
-                KAMPALA, UGANDA
-            </strong>
-
+        <div class="credential-row scroll-reveal">
+            <span>LOCATION</span>
+            <strong>KAMPALA, UGANDA</strong>
         </div>
 
-
-        <div class="credential-row">
-
-            <span>
-                REGISTRATION
-            </span>
-
-            <strong>
-                80020002131568
-            </strong>
-
+        <div class="credential-row scroll-reveal">
+            <span>REGISTRATION</span>
+            <strong>80020002131568</strong>
         </div>
 
-
-        <div class="credential-row">
-
-            <span>
-                FOUNDER
-            </span>
-
-            <strong>
-                GALUKANDE CHRISTOPHER
-            </strong>
-
+        <div class="credential-row scroll-reveal">
+            <span>FOUNDER</span>
+            <strong>GALUKANDE CHRISTOPHER</strong>
         </div>
 
-
-        <div class="credential-row">
-
-            <span>
-                REGION
-            </span>
-
-            <strong>
-                EAST AFRICA
-            </strong>
-
+        <div class="credential-row scroll-reveal">
+            <span>REGION</span>
+            <strong>EAST AFRICA</strong>
         </div>
 
     </div>
@@ -1279,12 +1026,11 @@
 
 <!-- =====================================================
      CLOSING
-====================================================== -->
+===================================================== -->
 
 <section class="about-closing">
 
-
-    <div class="closing-small">
+    <div class="closing-small scroll-reveal">
 
         YOUR STORY DESERVES
         <br>
@@ -1293,7 +1039,7 @@
     </div>
 
 
-    <h2>
+    <h2 class="scroll-reveal">
 
         Let's create
         <br>
@@ -1308,7 +1054,7 @@
 
     <a
         href="contact.html"
-        class="closing-link"
+        class="closing-link scroll-reveal"
     >
 
         START A PROJECT
@@ -1323,17 +1069,16 @@
 
 <!-- =====================================================
      FOOTER
-====================================================== -->
+===================================================== -->
 
 <footer class="footer">
 
-
     <div class="footer-brand">
 
-        <h2>
-            XCY
-        </h2>
-
+        <img
+            src="images/xcylogo.png"
+            alt="XCY EVENTS"
+        >
 
         <p>
             Photography / Film
@@ -1342,85 +1087,46 @@
     </div>
 
 
-
     <div class="footer-columns">
-
 
         <div>
 
-            <span>
-                NAVIGATE
-            </span>
+            <span>NAVIGATE</span>
 
-
-            <a href="index.html">
-                Home
-            </a>
-
-
-            <a href="work.html">
-                Archive
-            </a>
-
-
-            <a href="services.html">
-                Services
-            </a>
-
-
-            <a href="about.html">
-                About
-            </a>
-
-
-            <a href="contact.html">
-                Contact
-            </a>
+            <a href="index.html">Home</a>
+            <a href="work.html">Gallery</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
 
         </div>
 
 
-
         <div>
 
-            <span>
-                STUDIO
-            </span>
-
+            <span>STUDIO</span>
 
             <p>
-
                 Access Building
                 <br>
-
                 Rubaga Road
                 <br>
-
                 Opp. Hotel Sojovalo
                 <br>
-
                 Kampala, Uganda
-
             </p>
 
         </div>
 
 
-
         <div>
 
-            <span>
-                REGISTRATION
-            </span>
-
+            <span>REGISTRATION</span>
 
             <p>
-
                 Reg. No.
                 <br>
-
                 80020002131568
-
             </p>
 
         </div>
@@ -1428,13 +1134,11 @@
     </div>
 
 
-
     <div class="footer-bottom">
 
         <span>
             © 2026 XCY EVENTS
         </span>
-
 
         <span>
             KAMPALA · EAST AFRICA
@@ -1448,5 +1152,4 @@
 <script src="about.js"></script>
 
 </body>
-
 </html>

@@ -17,8 +17,7 @@
         content="XCY EVENTS provides premium photography and videography services across Uganda and East Africa."
     >
 
-    <!-- GOOGLE FONTS -->
-
+    <!-- GOOGLE FONT — SAME AS INDEX -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link
@@ -28,7 +27,7 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Manrope:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet"
     >
 
@@ -53,7 +52,12 @@
         href="index.html"
         class="brand"
     >
-        XCY
+
+        <img
+            src="images/xcylogo.png"
+            alt="XCY EVENTS"
+        >
+
     </a>
 
 
@@ -67,6 +71,8 @@
     <button
         class="menu-button"
         id="menuButton"
+        aria-label="Open menu"
+        aria-expanded="false"
     >
 
         <span>MENU</span>
@@ -91,9 +97,10 @@
 <div
     class="menu-panel"
     id="menuPanel"
+    aria-hidden="true"
 >
 
-    <div class="menu-inner">
+    <div class="menu-panel-inner">
 
 
         <div class="menu-top">
@@ -105,7 +112,7 @@
 
             <button id="closeMenu">
 
-                CLOSE ×
+                CLOSE <strong>×</strong>
 
             </button>
 
@@ -119,7 +126,7 @@
 
                 <small>01</small>
 
-                Home
+                <span>Home</span>
 
             </a>
 
@@ -128,7 +135,7 @@
 
                 <small>02</small>
 
-                Archive
+                <span>Gallery</span>
 
             </a>
 
@@ -137,7 +144,7 @@
 
                 <small>03</small>
 
-                Services
+                <span>Services</span>
 
             </a>
 
@@ -146,7 +153,7 @@
 
                 <small>04</small>
 
-                About
+                <span>About</span>
 
             </a>
 
@@ -155,7 +162,7 @@
 
                 <small>05</small>
 
-                Contact
+                <span>Contact</span>
 
             </a>
 
@@ -194,17 +201,17 @@
 
     <div class="hero-meta">
 
-        <span>
+        <span class="hero-reveal" style="--hero-delay: .2s">
             XCY / 03
         </span>
 
 
-        <span>
+        <span class="hero-reveal" style="--hero-delay: .3s">
             SERVICES
         </span>
 
 
-        <span>
+        <span class="hero-reveal" style="--hero-delay: .4s">
             UGANDA · EAST AFRICA
         </span>
 
@@ -214,24 +221,31 @@
 
     <div class="hero-content">
 
-        <p class="eyebrow">
-
+        <p
+            class="eyebrow hero-reveal"
+            style="--hero-delay: .45s"
+        >
             WHAT WE CREATE
-
         </p>
 
 
-        <h1>
+        <h1
+            class="hero-reveal"
+            style="--hero-delay: .6s"
+        >
 
             More than
             <br>
 
-            <em>photographs.</em>
+            <span>photographs.</span>
 
         </h1>
 
 
-        <p class="hero-text">
+        <p
+            class="hero-text hero-reveal"
+            style="--hero-delay: .8s"
+        >
 
             We create images and films that preserve
             atmosphere, emotion, personality and
@@ -244,7 +258,7 @@
 
 
 
-    <div class="hero-bottom">
+    <div class="hero-bottom hero-reveal" style="--hero-delay: 1s">
 
         <span>
             PHOTOGRAPHY
@@ -273,7 +287,7 @@
 <section class="services-intro">
 
 
-    <div class="intro-number">
+    <div class="intro-number scroll-reveal">
 
         01
 
@@ -282,27 +296,27 @@
 
     <div class="intro-copy">
 
-        <p>
+        <p class="scroll-reveal">
 
             Every assignment is different.
 
         </p>
 
 
-        <h2>
+        <h2 class="scroll-reveal">
 
             Our approach begins
             <br>
 
-            with <em>your story.</em>
+            with <span>your story.</span>
 
         </h2>
 
 
-        <div class="intro-line"></div>
+        <div class="intro-line scroll-reveal"></div>
 
 
-        <p class="intro-small">
+        <p class="intro-small scroll-reveal">
 
             From intimate portraits to large-scale
             celebrations, XCY combines experienced
@@ -328,8 +342,9 @@
     <!-- SERVICE 01 -->
 
     <article
-        class="service-item"
+        class="service-item scroll-reveal"
         data-image="images/service-wedding.jpg"
+        style="--reveal-delay: 0ms"
     >
 
         <div class="service-number">
@@ -362,21 +377,10 @@
 
             <div class="service-tags">
 
-                <span>
-                    PRE-WEDDING
-                </span>
-
-                <span>
-                    CEREMONY
-                </span>
-
-                <span>
-                    RECEPTION
-                </span>
-
-                <span>
-                    CINEMATIC FILM
-                </span>
+                <span>PRE-WEDDING</span>
+                <span>CEREMONY</span>
+                <span>RECEPTION</span>
+                <span>CINEMATIC FILM</span>
 
             </div>
 
@@ -396,8 +400,9 @@
     <!-- SERVICE 02 -->
 
     <article
-        class="service-item"
+        class="service-item scroll-reveal"
         data-image="images/service-introduction.jpg"
+        style="--reveal-delay: 70ms"
     >
 
         <div class="service-number">
@@ -429,21 +434,10 @@
 
             <div class="service-tags">
 
-                <span>
-                    TRADITION
-                </span>
-
-                <span>
-                    FAMILY
-                </span>
-
-                <span>
-                    PORTRAITS
-                </span>
-
-                <span>
-                    EVENT FILM
-                </span>
+                <span>TRADITION</span>
+                <span>FAMILY</span>
+                <span>PORTRAITS</span>
+                <span>EVENT FILM</span>
 
             </div>
 
@@ -463,8 +457,9 @@
     <!-- SERVICE 03 -->
 
     <article
-        class="service-item"
+        class="service-item scroll-reveal"
         data-image="images/service-portrait.jpg"
+        style="--reveal-delay: 140ms"
     >
 
         <div class="service-number">
@@ -496,21 +491,10 @@
 
             <div class="service-tags">
 
-                <span>
-                    PERSONAL
-                </span>
-
-                <span>
-                    CORPORATE
-                </span>
-
-                <span>
-                    EDITORIAL
-                </span>
-
-                <span>
-                    BRAND
-                </span>
+                <span>PERSONAL</span>
+                <span>CORPORATE</span>
+                <span>EDITORIAL</span>
+                <span>BRAND</span>
 
             </div>
 
@@ -530,8 +514,9 @@
     <!-- SERVICE 04 -->
 
     <article
-        class="service-item"
+        class="service-item scroll-reveal"
         data-image="images/service-events.jpg"
+        style="--reveal-delay: 210ms"
     >
 
         <div class="service-number">
@@ -563,21 +548,10 @@
 
             <div class="service-tags">
 
-                <span>
-                    CORPORATE
-                </span>
-
-                <span>
-                    CONCERTS
-                </span>
-
-                <span>
-                    LAUNCHES
-                </span>
-
-                <span>
-                    COVERAGE
-                </span>
+                <span>CORPORATE</span>
+                <span>CONCERTS</span>
+                <span>LAUNCHES</span>
+                <span>COVERAGE</span>
 
             </div>
 
@@ -597,8 +571,9 @@
     <!-- SERVICE 05 -->
 
     <article
-        class="service-item"
+        class="service-item scroll-reveal"
         data-image="images/service-fashion.jpg"
+        style="--reveal-delay: 280ms"
     >
 
         <div class="service-number">
@@ -630,21 +605,10 @@
 
             <div class="service-tags">
 
-                <span>
-                    FASHION
-                </span>
-
-                <span>
-                    EDITORIAL
-                </span>
-
-                <span>
-                    CAMPAIGNS
-                </span>
-
-                <span>
-                    LOOKBOOKS
-                </span>
+                <span>FASHION</span>
+                <span>EDITORIAL</span>
+                <span>CAMPAIGNS</span>
+                <span>LOOKBOOKS</span>
 
             </div>
 
@@ -664,8 +628,9 @@
     <!-- SERVICE 06 -->
 
     <article
-        class="service-item"
+        class="service-item scroll-reveal"
         data-image="images/service-commercial.jpg"
+        style="--reveal-delay: 350ms"
     >
 
         <div class="service-number">
@@ -697,21 +662,10 @@
 
             <div class="service-tags">
 
-                <span>
-                    BRAND CONTENT
-                </span>
-
-                <span>
-                    PRODUCT
-                </span>
-
-                <span>
-                    CAMPAIGNS
-                </span>
-
-                <span>
-                    SOCIAL
-                </span>
+                <span>BRAND CONTENT</span>
+                <span>PRODUCT</span>
+                <span>CAMPAIGNS</span>
+                <span>SOCIAL</span>
 
             </div>
 
@@ -731,8 +685,9 @@
     <!-- SERVICE 07 -->
 
     <article
-        class="service-item"
+        class="service-item scroll-reveal"
         data-image="images/service-film.jpg"
+        style="--reveal-delay: 420ms"
     >
 
         <div class="service-number">
@@ -765,21 +720,10 @@
 
             <div class="service-tags">
 
-                <span>
-                    EVENT FILMS
-                </span>
-
-                <span>
-                    PROMO
-                </span>
-
-                <span>
-                    DOCUMENTARY
-                </span>
-
-                <span>
-                    SOCIAL FILM
-                </span>
+                <span>EVENT FILMS</span>
+                <span>PROMO</span>
+                <span>DOCUMENTARY</span>
+                <span>SOCIAL FILM</span>
 
             </div>
 
@@ -807,17 +751,17 @@
 
     <div class="process-heading">
 
-        <span>
+        <span class="scroll-reveal">
             02 / PROCESS
         </span>
 
 
-        <h2>
+        <h2 class="scroll-reveal">
 
             From idea
             <br>
 
-            to <em>image.</em>
+            to <span>image.</span>
 
         </h2>
 
@@ -828,18 +772,14 @@
     <div class="process-list">
 
 
-        <div class="process-item">
+        <div class="process-item scroll-reveal">
 
-            <span>
-                01
-            </span>
+            <span>01</span>
 
 
             <div>
 
-                <h3>
-                    DISCOVER
-                </h3>
+                <h3>DISCOVER</h3>
 
                 <p>
 
@@ -855,18 +795,14 @@
 
 
 
-        <div class="process-item">
+        <div class="process-item scroll-reveal">
 
-            <span>
-                02
-            </span>
+            <span>02</span>
 
 
             <div>
 
-                <h3>
-                    PLAN
-                </h3>
+                <h3>PLAN</h3>
 
                 <p>
 
@@ -882,18 +818,14 @@
 
 
 
-        <div class="process-item">
+        <div class="process-item scroll-reveal">
 
-            <span>
-                03
-            </span>
+            <span>03</span>
 
 
             <div>
 
-                <h3>
-                    CREATE
-                </h3>
+                <h3>CREATE</h3>
 
                 <p>
 
@@ -909,18 +841,14 @@
 
 
 
-        <div class="process-item">
+        <div class="process-item scroll-reveal">
 
-            <span>
-                04
-            </span>
+            <span>04</span>
 
 
             <div>
 
-                <h3>
-                    DELIVER
-                </h3>
+                <h3>DELIVER</h3>
 
                 <p>
 
@@ -941,30 +869,30 @@
 
 
 <!-- =====================================================
-     CUSTOM PROJECTS
+     CUSTOM PROJECT
 ====================================================== -->
 
 <section class="custom-project">
 
 
-    <div class="custom-label">
+    <div class="custom-label scroll-reveal">
 
         NOT SEEING YOUR PROJECT?
 
     </div>
 
 
-    <h2>
+    <h2 class="scroll-reveal">
 
         Tell us what
         <br>
 
-        you're <em>imagining.</em>
+        you're <span>imagining.</span>
 
     </h2>
 
 
-    <p>
+    <p class="scroll-reveal">
 
         Our team also works on custom productions,
         creative concepts, brand campaigns,
@@ -976,7 +904,7 @@
 
     <a
         href="contact.html"
-        class="project-link"
+        class="project-link scroll-reveal"
     >
 
         DISCUSS A PROJECT
@@ -989,6 +917,10 @@
 
 
 
+</main>
+
+
+
 <!-- =====================================================
      FOOTER
 ====================================================== -->
@@ -998,13 +930,14 @@
 
     <div class="footer-brand">
 
-        <h2>
-            XCY
-        </h2>
+        <img
+            src="images/xcylogo.png"
+            alt="XCY EVENTS"
+        >
 
 
         <p>
-            Photography / Film
+            PHOTOGRAPHY / FILM
         </p>
 
     </div>
@@ -1027,7 +960,7 @@
 
 
             <a href="work.html">
-                Archive
+                Gallery
             </a>
 
 

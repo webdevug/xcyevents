@@ -1,170 +1,296 @@
 /* =========================================================
-   XCY EVENTS
-   ABOUT PAGE
+   XCY EVENTS — ABOUT
+   MENU + SCROLL REVEALS
 ========================================================= */
 
-
-/* =========================================================
-   MENU
-========================================================= */
-
-const menuButton =
-    document.getElementById("menuButton");
-
-const menuPanel =
-    document.getElementById("menuPanel");
-
-const closeMenu =
-    document.getElementById("closeMenu");
+document.addEventListener("DOMContentLoaded", () => {
 
 
-menuButton.addEventListener(
-    "click",
-    () => {
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const body = document.body;
+
+    const menuButton =
+        document.getElementById("menuButton");
+
+    const closeMenu =
+        document.getElementById("closeMenu");
+
+    const menuPanel =
+        document.getElementById("menuPanel");
+
+    const menuLinks =
+        document.querySelectorAll(".menu-panel nav a");
+
+
+    /* =====================================================
+       REDUCED MOTION
+    ===================================================== */
+
+    const prefersReducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+
+    if (prefersReducedMotion) {
+        body.classList.add("reduce-motion");
+    }
+
+
+    /* =====================================================
+       MENU
+    ===================================================== */
+
+    const openMenu = () => {
+
+        if (!menuPanel) return;
 
         menuPanel.classList.add("open");
 
-        document.body.classList.add(
-            "no-scroll"
+        body.classList.add("menu-open");
+
+        menuPanel.setAttribute(
+            "aria-hidden",
+            "false"
         );
 
-    }
-);
+        menuButton?.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+    };
 
 
-closeMenu.addEventListener(
-    "click",
-    () => {
+    const closeMenuPanel = () => {
+
+        if (!menuPanel) return;
 
         menuPanel.classList.remove("open");
 
-        document.body.classList.remove(
-            "no-scroll"
+        body.classList.remove("menu-open");
+
+        menuPanel.setAttribute(
+            "aria-hidden",
+            "true"
         );
 
-    }
-);
+        menuButton?.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    };
 
 
-document
-    .querySelectorAll(".menu-panel nav a")
-    .forEach(link => {
+    menuButton?.addEventListener(
+        "click",
+        openMenu
+    );
+
+
+    closeMenu?.addEventListener(
+        "click",
+        closeMenuPanel
+    );
+
+
+    menuLinks.forEach(link => {
 
         link.addEventListener(
             "click",
-            () => {
-
-                menuPanel.classList.remove(
-                    "open"
-                );
-
-                document.body.classList.remove(
-                    "no-scroll"
-                );
-
-            }
+            closeMenuPanel
         );
 
     });
 
 
+    document.addEventListener(
+        "keydown",
+        event => {
 
-/* =========================================================
-   SCROLL REVEALS
-========================================================= */
+            if (event.key === "Escape") {
+                closeMenuPanel();
+            }
 
-const revealElements =
-    document.querySelectorAll(
-        ".statement-content p, .founder-copy, .philosophy-item, .expertise-content, .credential-row, .about-closing h2"
-    );
-
-
-const observer =
-    new IntersectionObserver(
-
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (
-                    entry.isIntersecting
-                ) {
-
-                    entry.target.classList.add(
-                        "visible"
-                    );
-
-                    observer.unobserve(
-                        entry.target
-                    );
-
-                }
-
-            });
-
-        },
-
-        {
-            threshold: .12
         }
-
     );
 
 
-revealElements.forEach(
-    element => {
+    /* =====================================================
+       SCROLL REVEALS
+    ===================================================== */
 
-        observer.observe(element);
-
-    }
-);
-
-
-
-/* =========================================================
-   IMAGE PARALLAX
-========================================================= */
-
-const images =
-    document.querySelectorAll(
-        ".founder-image img, .africa-image img"
-    );
+    const revealElements =
+        document.querySelectorAll(
+            ".scroll-reveal"
+        );
 
 
-window.addEventListener(
-    "scroll",
-    () => {
-
-        const scrollY =
-            window.scrollY;
+    const imageRevealElements =
+        document.querySelectorAll(
+            ".image-scroll-reveal"
+        );
 
 
-        images.forEach(image => {
-
-            const rect =
-                image.getBoundingClientRect();
-
-
-            if (
-                rect.top < window.innerHeight &&
-                rect.bottom > 0
-            ) {
-
-                const movement =
-                    (window.innerHeight / 2 -
-                    (rect.top + rect.height / 2))
-                    * .04;
+    if (
+        "IntersectionObserver" in window &&
+        !prefersReducedMotion
+    ) {
 
 
-                image.style.transform =
-                    `translateY(${movement}px)`;
+        const revealObserver =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+
+                        entry.target.classList.add(
+                            "is-visible"
+                        );
+
+
+                        revealObserver.unobserve(
+                            entry.target
+                        );
+
+                    });
+
+                },
+                {
+                    threshold: 0.12,
+                    rootMargin: "0px 0px -60px 0px"
+                }
+            );
+
+
+        revealElements.forEach(
+            (element, index) => {
+
+                element.style.setProperty(
+                    "--reveal-delay",
+                    `${Math.min(index % 5, 4) * 70}ms`
+                );
+
+                revealObserver.observe(element);
 
             }
+        );
+
+
+        const imageObserver =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+
+                        entry.target.classList.add(
+                            "image-visible"
+                        );
+
+
+                        imageObserver.unobserve(
+                            entry.target
+                        );
+
+                    });
+
+                },
+                {
+                    threshold: 0.1,
+                    rootMargin: "0px 0px -50px 0px"
+                }
+            );
+
+
+        imageRevealElements.forEach(
+            element => {
+
+                imageObserver.observe(element);
+
+            }
+        );
+
+    } else {
+
+        revealElements.forEach(
+            element => {
+
+                element.classList.add(
+                    "is-visible"
+                );
+
+            }
+        );
+
+
+        imageRevealElements.forEach(
+            element => {
+
+                element.classList.add(
+                    "image-visible"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       IMAGE LOADING
+    ===================================================== */
+
+    document
+        .querySelectorAll("img[loading='lazy']")
+        .forEach(image => {
+
+            image.addEventListener(
+                "error",
+                () => {
+
+                    image.style.opacity = "0";
+
+                },
+                {
+                    once: true
+                }
+            );
 
         });
 
-    },
-    {
-        passive: true
-    }
-);
+
+    /* =====================================================
+       ESCAPE SCROLL LOCK SAFETY
+    ===================================================== */
+
+    window.addEventListener(
+        "pageshow",
+        () => {
+
+            body.classList.remove(
+                "menu-open"
+            );
+
+            menuPanel?.classList.remove(
+                "open"
+            );
+
+        }
+    );
+
+
+});
